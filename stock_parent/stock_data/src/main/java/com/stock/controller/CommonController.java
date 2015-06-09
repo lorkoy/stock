@@ -21,6 +21,7 @@ public class CommonController {
 	public Message common(){
 		Message msg = new Message();
 		try {
+			msg.setMsg("sh600108,sh601998");
 			StockDataQueen.getInstance().getQueen().put(msg);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
