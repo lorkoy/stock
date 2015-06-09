@@ -10,14 +10,21 @@ import java.util.concurrent.BlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.stock.data.Common;
 import com.stock.db.entity.StockInfo;
+import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.Message;
 import com.stock.exception.ExUtils;
 
-
 public class SaveStockData<T> extends Worker<T> {
+	
+	@Autowired
+	private StockInfoMapper stockInfoMapper;
+	
 	private static final Logger logger = LoggerFactory.getLogger(SaveStockData.class);
 	
 	public SaveStockData(BlockingQueue<T> queen){
@@ -28,7 +35,10 @@ public class SaveStockData<T> extends Worker<T> {
 	void doWork(Object t) {
 		Message msg = (Message) t;
 		try {
-			queryStockInfo(msg.getMsg());
+			List<StockInfo> stocks = queryStockInfo(msg.getMsg());
+//			for(StockInfo stock:stocks){
+//				stockInfoMapper.insertSelective(stock);
+//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

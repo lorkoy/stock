@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.db.mybatis.StockInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.stock.db.entity.StockInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="closing" property="closing" jdbcType="VARCHAR" />
+    <result column="open" property="open" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="lowest" property="lowest" jdbcType="VARCHAR" />
+    <result column="highest" property="highest" jdbcType="VARCHAR" />
+    <result column="current" property="current" jdbcType="VARCHAR" />
+    <result column="preClose" property="preclose" jdbcType="VARCHAR" />
+    <result column="vol" property="vol" jdbcType="VARCHAR" />
+    <result column="closingCost" property="closingcost" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="week" property="week" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, closing, open, name, code, lowest, highest, current, preClose, vol, closingCost, 
+    date, time, week
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stock.db.entity.StockInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stock_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from stock_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stock_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.stock.db.entity.StockInfoExample" >
+    delete from stock_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.stock.db.entity.StockInfo" >
+    insert into stock_info (id, closing, open, 
+      name, code, lowest, 
+      highest, current, preClose, 
+      vol, closingCost, date, 
+      time, week)
+    values (#{id,jdbcType=VARCHAR}, #{closing,jdbcType=VARCHAR}, #{open,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{lowest,jdbcType=VARCHAR}, 
+      #{highest,jdbcType=VARCHAR}, #{current,jdbcType=VARCHAR}, #{preclose,jdbcType=VARCHAR}, 
+      #{vol,jdbcType=VARCHAR}, #{closingcost,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, 
+      #{time,jdbcType=VARCHAR}, #{week,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stock.db.entity.StockInfo" >
+    insert into stock_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="closing != null" >
+        closing,
+      </if>
+      <if test="open != null" >
+        open,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="lowest != null" >
+        lowest,
+      </if>
+      <if test="highest != null" >
+        highest,
+      </if>
+      <if test="current != null" >
+        current,
+      </if>
+      <if test="preclose != null" >
+        preClose,
+      </if>
+      <if test="vol != null" >
+        vol,
+      </if>
+      <if test="closingcost != null" >
+        closingCost,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="closing != null" >
+        #{closing,jdbcType=VARCHAR},
+      </if>
+      <if test="open != null" >
+        #{open,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="lowest != null" >
+        #{lowest,jdbcType=VARCHAR},
+      </if>
+      <if test="highest != null" >
+        #{highest,jdbcType=VARCHAR},
+      </if>
+      <if test="current != null" >
+        #{current,jdbcType=VARCHAR},
+      </if>
+      <if test="preclose != null" >
+        #{preclose,jdbcType=VARCHAR},
+      </if>
+      <if test="vol != null" >
+        #{vol,jdbcType=VARCHAR},
+      </if>
+      <if test="closingcost != null" >
+        #{closingcost,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.stock.db.entity.StockInfoExample" resultType="java.lang.Integer" >
+    select count(*) from stock_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stock_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closing != null" >
+        closing = #{record.closing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.open != null" >
+        open = #{record.open,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lowest != null" >
+        lowest = #{record.lowest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.highest != null" >
+        highest = #{record.highest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.current != null" >
+        current = #{record.current,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preclose != null" >
+        preClose = #{record.preclose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vol != null" >
+        vol = #{record.vol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closingcost != null" >
+        closingCost = #{record.closingcost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.week != null" >
+        week = #{record.week,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stock_info
+    set id = #{record.id,jdbcType=VARCHAR},
+      closing = #{record.closing,jdbcType=VARCHAR},
+      open = #{record.open,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      lowest = #{record.lowest,jdbcType=VARCHAR},
+      highest = #{record.highest,jdbcType=VARCHAR},
+      current = #{record.current,jdbcType=VARCHAR},
+      preClose = #{record.preclose,jdbcType=VARCHAR},
+      vol = #{record.vol,jdbcType=VARCHAR},
+      closingCost = #{record.closingcost,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=DATE},
+      time = #{record.time,jdbcType=VARCHAR},
+      week = #{record.week,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stock.db.entity.StockInfo" >
+    update stock_info
+    <set >
+      <if test="closing != null" >
+        closing = #{closing,jdbcType=VARCHAR},
+      </if>
+      <if test="open != null" >
+        open = #{open,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="lowest != null" >
+        lowest = #{lowest,jdbcType=VARCHAR},
+      </if>
+      <if test="highest != null" >
+        highest = #{highest,jdbcType=VARCHAR},
+      </if>
+      <if test="current != null" >
+        current = #{current,jdbcType=VARCHAR},
+      </if>
+      <if test="preclose != null" >
+        preClose = #{preclose,jdbcType=VARCHAR},
+      </if>
+      <if test="vol != null" >
+        vol = #{vol,jdbcType=VARCHAR},
+      </if>
+      <if test="closingcost != null" >
+        closingCost = #{closingcost,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stock.db.entity.StockInfo" >
+    update stock_info
+    set closing = #{closing,jdbcType=VARCHAR},
+      open = #{open,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      lowest = #{lowest,jdbcType=VARCHAR},
+      highest = #{highest,jdbcType=VARCHAR},
+      current = #{current,jdbcType=VARCHAR},
+      preClose = #{preclose,jdbcType=VARCHAR},
+      vol = #{vol,jdbcType=VARCHAR},
+      closingCost = #{closingcost,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      time = #{time,jdbcType=VARCHAR},
+      week = #{week,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

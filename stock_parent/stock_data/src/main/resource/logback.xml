@@ -73,7 +73,7 @@
 
 	<!-- root level="INFO"-->
  
-	<root level="INFO"> 
+	<root level="debug"> 
 		<appender-ref ref="console" />
 		<appender-ref ref="defaultLogFile" />
 	</root>
