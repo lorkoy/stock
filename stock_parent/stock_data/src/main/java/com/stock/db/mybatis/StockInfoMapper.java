@@ -1,10 +1,14 @@
 package com.stock.db.mybatis;
 
-import com.stock.db.entity.StockInfo;
-import com.stock.db.entity.StockInfoExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.stock.db.MyBatisRepository;
+import com.stock.db.entity.StockInfo;
+import com.stock.db.entity.StockInfoExample;
+
+@MyBatisRepository
 public interface StockInfoMapper {
     int countByExample(StockInfoExample example);
 

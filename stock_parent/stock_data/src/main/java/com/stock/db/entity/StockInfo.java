@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.springframework.util.StringUtils;
 
-import com.stock.DateUtils;
+import com.stock.util.DateUtils;
 
 public class StockInfo {
     private String id;

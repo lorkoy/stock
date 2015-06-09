@@ -8,17 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import com.stock.data.Common;
 import com.stock.db.entity.StockInfo;
 import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.Message;
 import com.stock.exception.ExUtils;
+import com.stock.spring.ApplicationContextHodler;
+
 
 public class SaveStockData<T> extends Worker<T> {
 	
@@ -33,12 +35,13 @@ public class SaveStockData<T> extends Worker<T> {
 
 	@Override
 	void doWork(Object t) {
+		stockInfoMapper = (StockInfoMapper) ApplicationContextHodler.getBean("stockInfoMapper");
 		Message msg = (Message) t;
 		try {
 			List<StockInfo> stocks = queryStockInfo(msg.getMsg());
-//			for(StockInfo stock:stocks){
-//				stockInfoMapper.insertSelective(stock);
-//			}
+			for(StockInfo stock:stocks){
+				stockInfoMapper.insertSelective(stock);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
