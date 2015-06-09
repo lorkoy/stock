@@ -14,18 +14,15 @@
 		<spring.version>4.0.5.RELEASE</spring.version>
 		<mybatis.version>3.2.7</mybatis.version>
 		<spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
-		<tomcat-jdbc.version>7.0.54</tomcat-jdbc.version>
-		<shiro.version>1.2.3</shiro.version>
-		<cxf.version>2.7.12</cxf.version>
+		<tomcat-jdbc.version>7.0.62</tomcat-jdbc.version>
 		<jackson.version>2.4.0</jackson.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<logback.version>1.1.2</logback.version>
-		<httpclient.version>4.3.4</httpclient.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<guava.version>17.0</guava.version>
 		<aspectj.version>1.7.4</aspectj.version>
-		<junit.version>4.11</junit.version>
 		<assertj.version>1.6.1</assertj.version>
+		<junit.version>4.11</junit.version>
 		<quartz.version>2.2.1</quartz.version>
 		<!-- Plugin -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -59,12 +56,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 		<!-- aop -->
 		<dependency>
@@ -90,7 +86,12 @@
 				<version>${spring.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+			<!-- spring data jpa -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${spring-data-jpa.version}</version>
+			</dependency>
 				<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -113,6 +114,19 @@
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz-jobs</artifactId>
 				<version>${quartz.version}</version>
+			</dependency>
+			
+				<dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>${jackson.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<!-- joda for jackson -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-joda</artifactId>
+				<version>${jackson.version}</version>
 			</dependency>
 	</dependencies>
 </project>
