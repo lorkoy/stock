@@ -9,6 +9,7 @@ import com.stock.data.biz.DataService;
 import com.stock.data.queen.work.StockDataQueen;
 import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.Message;
+import com.stock.spring.ApplicationContextHodler;
 
 
 @RestController
@@ -22,14 +23,11 @@ public class CommonController {
 	
 	@RequestMapping("common")
 	public Message common(){
-		stockInfoMapper.selectByPrimaryKey("");
-		Message msg = new Message();
-		try {
-			msg.setMsg("sh600108,sh601998");
-			StockDataQueen.getInstance().getQueen().put(msg);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		String [] beans = ApplicationContextHodler.getContext().getBeanDefinitionNames();
+		for(String name:beans){
+			System.out.println(name);
 		}
+		Message msg = new Message();
 		return msg;
 	}
 

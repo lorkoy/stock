@@ -8,46 +8,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.stock.data.Common;
 import com.stock.db.entity.StockInfo;
 import com.stock.db.mybatis.StockInfoMapper;
-import com.stock.dto.Message;
+import com.stock.dto.StockCode;
 import com.stock.exception.ExUtils;
 import com.stock.spring.ApplicationContextHodler;
 
 
-public class SaveStockData<T> extends Worker<T> {
+public class SaveStockDataWorker extends Worker<StockCode> {
 	
-	@Autowired
-	private StockInfoMapper stockInfoMapper;
+	private static final Logger logger = LoggerFactory.getLogger(SaveStockDataWorker.class);
 	
-	private static final Logger logger = LoggerFactory.getLogger(SaveStockData.class);
-	
-	public SaveStockData(BlockingQueue<T> queen){
+	public SaveStockDataWorker(BlockingQueue<StockCode> queen){
 		super(queen);
 	}
-
+	
 	@Override
-	void doWork(Object t) {
-		stockInfoMapper = (StockInfoMapper) ApplicationContextHodler.getBean("stockInfoMapper");
-		Message msg = (Message) t;
+	void doWork(StockCode code) {
+		StockInfoMapper stockInfoMapper = (StockInfoMapper) ApplicationContextHodler.getBean("stockInfoMapper");
 		try {
-			List<StockInfo> stocks = queryStockInfo(msg.getMsg());
+			List<StockInfo> stocks = queryStockInfo(code.getCode());
 			for(StockInfo stock:stocks){
 				stockInfoMapper.insertSelective(stock);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(ExUtils.printExAsString(e));
+			logger.debug(ExUtils.printExAsString(e));
 		}
 		
 	}
 	
+	/**
+	 * 从新浪获取股票数据
+	 * @param code
+	 * @return
+	 * @throws IOException
+	 */
 	public List<StockInfo> queryStockInfo(String code) throws IOException{
 		List<StockInfo> stocks = new ArrayList<StockInfo>();
 		InputStream is = null;
@@ -70,7 +70,7 @@ public class SaveStockData<T> extends Worker<T> {
 			}
 		} catch (Exception e) {
 			logger.error(ExUtils.printExAsString(e));
-			e.printStackTrace();
+			logger.debug(ExUtils.printExAsString(e));
 		}finally{
 			if(is != null){
 				is.close();

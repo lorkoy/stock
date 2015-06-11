@@ -6,14 +6,16 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import com.stock.dto.StockCode;
+
 public class StockDataQueen {
 	
-	private BlockingQueue<Object> queen;
+	private BlockingQueue<StockCode> queen;
 	private ThreadPoolExecutor executor;
 	private int poolSize = 10;
 	
 	public StockDataQueen(){
-		this.queen = new LinkedBlockingQueue<Object>();
+		this.queen = new LinkedBlockingQueue<StockCode>();
 		this.executor = new ThreadPoolExecutor(poolSize, 10, 200,
 				TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(100));
 	}
@@ -21,7 +23,7 @@ public class StockDataQueen {
 	
 	public void startWork(){
 		for(int i=0;i<poolSize;i++){
-			SaveStockData<Object> command = new SaveStockData<Object>(queen);
+			SaveStockDataWorker command = new SaveStockDataWorker(queen);
 			executor.execute(command);
 		}
 	}
@@ -36,11 +38,11 @@ public class StockDataQueen {
 		return SingletonHolder.instance;
 	}
 
-	public BlockingQueue<Object> getQueen() {
+	public BlockingQueue<StockCode> getQueen() {
 		return queen;
 	}
 
-	public void setQueen(BlockingQueue<Object> queen) {
+	public void setQueen(BlockingQueue<StockCode> queen) {
 		this.queen = queen;
 	}
 
