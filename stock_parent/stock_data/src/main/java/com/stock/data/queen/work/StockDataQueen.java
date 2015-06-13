@@ -1,31 +1,28 @@
 package com.stock.data.queen.work;
 
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import com.stock.dto.StockCode;
 
 public class StockDataQueen {
 	
 	private BlockingQueue<StockCode> queen;
-	private ThreadPoolExecutor executor;
-	private int poolSize = 15;
-	private int maxPoolSize = 20;
+	private ExecutorService executorService;
+	private int poolSize = 35;
 	
 	public StockDataQueen(){
 		this.queen = new LinkedBlockingQueue<StockCode>();
-		this.executor = new ThreadPoolExecutor(poolSize, maxPoolSize, 200,
-				TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(100));
+		executorService = Executors.newCachedThreadPool();
 	}
 	
 	
 	public void startWork(){
 		for(int i=0;i<poolSize;i++){
 			SaveStockDataWorker command = new SaveStockDataWorker(queen);
-			executor.execute(command);
+			executorService.execute(command);
 		}
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stock.data.biz.DataService;
+import com.stock.data.biz.StockService;
 import com.stock.data.queen.work.StockDataQueen;
 import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.Message;
@@ -19,12 +20,13 @@ public class CommonController {
 	private DataService dataService;
 	
 	@Autowired
-	private StockInfoMapper stockInfoMapper;
+	private StockService stockService;
 	
 	@RequestMapping("common")
 	public Message common(){
+//		stockService.saveStock();
 		try {
-			dataService.parseStockCode();
+			dataService.service();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

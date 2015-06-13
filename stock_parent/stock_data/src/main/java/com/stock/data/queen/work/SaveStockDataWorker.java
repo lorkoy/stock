@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.concurrent.BlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import com.stock.data.Common;
 import com.stock.db.entity.StockInfo;
@@ -49,6 +47,7 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 	
 	/**
 	 * 从新浪获取股票数据
+	 * http://hq.sinajs.cn/list=
 	 * @param code
 	 * @return
 	 * @throws IOException
@@ -70,14 +69,13 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 			for(String str:result){
 				String[] info = str.split("=");
 				if (info.length == 2&& StringUtil.replaceBlank(info[1]).length()>3) {
-					logger.debug("query stock info result is {} and result length is ",info[1], info[1].length());
+					logger.info("query stock info result is {} and result length is {}",info[1], info[1].length());
 					StockInfo stock = createStockInfo(info[1],info[0].substring(3,info[0].length()));
 					stocks.add(stock);
 				}
 			}
 		} catch (Exception e) {
 			logger.error(ExUtils.printExAsString(e));
-			logger.debug(ExUtils.printExAsString(e));
 		}finally{
 			if(is != null){
 				is.close();

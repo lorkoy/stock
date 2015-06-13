@@ -1,18 +1,8 @@
 package com.stock.db.entity;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
-import com.stock.data.biz.DataService;
-import com.stock.util.DateUtils;
 
 public class StockInfo {
-	private static final Logger logger = LoggerFactory.getLogger(StockInfo.class);
 	
     private String id;
 

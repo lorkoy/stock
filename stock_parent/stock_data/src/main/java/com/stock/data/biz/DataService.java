@@ -1,56 +1,69 @@
 package com.stock.data.biz;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stock.data.Common;
 import com.stock.data.queen.work.StockDataQueen;
+import com.stock.db.entity.Stock;
+import com.stock.db.entity.StockExample;
+import com.stock.db.mybatis.StockMapper;
 import com.stock.dto.StockCode;
+import com.stock.exception.ExUtils;
 
 
 @Component("dataService")
+@Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor=Exception.class)
 public class DataService {
+	
+	@Autowired
+	private StockMapper stockMapper;
+	
+	
 	private static final Logger logger = LoggerFactory.getLogger(DataService.class);
-	private static final int count = 10;
+	private static final int count = 50;
 	
 	public void service(){
 		try {
 			parseStockCode();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(ExUtils.printExAsString(e));
+			logger.debug("parse code error");
 		}
 		
 	}
 	
-	
-	public Map<String,List<String>> parseStockCode() throws Exception{
+	/**
+	 * 将股票代码组装成请求需要的格式
+	 *@author ray
+	 *@throws Exception
+	 * 
+	 *2015年6月14日 上午12:13:30
+	 */
+	private void parseStockCode() throws Exception{
 		int counter = 0;
-		Map<String,List<String>> allCodes = new HashMap<String, List<String>>();
-		List<String> shCodes = new ArrayList<String>();
-		List<String> szCodes = new ArrayList<String>();
-		String[] codes = Common.SH_CODE.split(" ");
-		
+		StockExample example = new StockExample();
+		example.createCriteria();
+		List<Stock> stocks = stockMapper.selectByExample(example);
 		String codeStr = "";
-		for(int i = 0;i<codes.length;i++){
-			String code = codes[i];
-			String temp = code.substring(code.indexOf("(")+1, code.length()-1);
+		for(int i = 0;i<stocks.size();i++){
+			Stock s = stocks.get(i);
+			String temp = s.getCode();
 			String stockCode = "";
 			if(temp.startsWith(Common.SH_CODE_PREFIX)){
 				stockCode = Common.SH_URL_PREFIX+temp;
-				shCodes.add(stockCode);
 			}else{
-				stockCode = Common.SH_URL_PREFIX+temp;
-				szCodes.add(stockCode);
+				stockCode = Common.SZ_URL_PREFIX+temp;
 			}
 			codeStr += stockCode+",";
 			counter++;
-			if(i ==codes.length-1){
+			if(i ==stocks.size()-1){
 				StockCode sc = new StockCode();
 				sc.setCode(codeStr.substring(0,codeStr.length()-1));
 				StockDataQueen.getInstance().getQueen().put(sc);
@@ -64,9 +77,6 @@ public class DataService {
 				StockDataQueen.getInstance().getQueen().put(sc);
 			}
 		}
-		allCodes.put("sz", szCodes);
-		allCodes.put("sh", shCodes);
-		return allCodes;
 	}
 	
 	

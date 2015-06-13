@@ -7,11 +7,13 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.stock.data.biz.DataService;
 import com.stock.dto.StockCode;
 import com.stock.spring.ApplicationContextHodler;
 
@@ -19,39 +21,31 @@ import com.stock.spring.ApplicationContextHodler;
 @EnableScheduling
 @Lazy(false)
 public class StockDataJob {
-	private static final Logger logger = LoggerFactory
-			.getLogger(StockDataJob.class);
+	private static final Logger logger = LoggerFactory.getLogger(StockDataJob.class);
+
+	@Autowired
+	private DataService dataService;
+	
 
 	/**
-	 * @author ray 每分钟获取一次股票实时数据 2015年6月11日 下午1:46:41
+	 * @author ray 每分钟获取一次股票实时数据 
+	 * 2015年6月11日 下午1:46:41
 	 */
 	// @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
 	@Scheduled(cron = "0 0/1,* * ? * MON-FRI")
 	public void stockDataJob() {
 //		jobSwith();
 		logger.debug("get stock data job start at {}", new Date());
-		
-		StockCode code = new StockCode();
-		code.setCode("sh600108,sh601998");
-		// try {
-		// StockDataQueen.getInstance().getQueen().put(code);
-		// } catch (InterruptedException e) {
-		// logger.error("put msg to queen error,msg is {}",code);
-		// logger.error(ExUtils.printExAsString(e));
-		// }
-		// TODO tortoise 任务调度
-		// Scheduler job = (Scheduler)
-		// ApplicationContextHodler.getBean("scheduler");
-
+		dataService.service();
 	}
 
+	
 	/**
+	 * 任务调度
+	 *@author ray
 	 * 
-	 * @author ray
-	 *
-	 *         2015年6月11日 下午1:46:21
+	 *@date 2015年6月14日 上午12:35:17
 	 */
-
 	public void jobSwith() {
 		Calendar cal = Calendar.getInstance();
 		int min = cal.get(Calendar.MINUTE);

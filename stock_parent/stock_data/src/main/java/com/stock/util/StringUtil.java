@@ -21,5 +21,11 @@ public class StringUtil {
         }
         return dest;
     }
+	
+	public static void main(String[] args) {
+		String str = "123\n\r";
+		String result = StringUtil.replaceBlank(str);
+		System.out.println(result);
+	}
 
 }
