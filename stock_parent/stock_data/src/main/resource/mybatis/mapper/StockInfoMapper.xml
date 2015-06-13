@@ -350,4 +350,21 @@
       week = #{week,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <insert id="batchInsert" parameterType="java.util.List">
+   insert into stock_info (id, closing, open, 
+      name, code, lowest, 
+      highest, current, preClose, 
+      vol, closingCost, date, 
+      time, week)
+    values
+  <foreach collection="list"  item="sc" separator="," index="index">
+ 	( #{sc.id,jdbcType=VARCHAR}, #{sc.closing,jdbcType=VARCHAR}, #{sc.open,jdbcType=VARCHAR}, 
+      #{sc.name,jdbcType=VARCHAR}, #{sc.code,jdbcType=VARCHAR}, #{sc.lowest,jdbcType=VARCHAR}, 
+      #{sc.highest,jdbcType=VARCHAR}, #{sc.current,jdbcType=VARCHAR}, #{sc.preclose,jdbcType=VARCHAR}, 
+      #{sc.vol,jdbcType=VARCHAR}, #{sc.closingcost,jdbcType=VARCHAR}, #{sc.date,jdbcType=DATE}, 
+      #{sc.time,jdbcType=VARCHAR}, #{sc.week,jdbcType=INTEGER})
+  </foreach>
+  
+  </insert>
 </mapper>

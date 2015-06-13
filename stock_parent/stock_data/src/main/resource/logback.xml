@@ -69,7 +69,7 @@
 
 	<!--log4jdbc -->
    
-	<logger name="com.stock" level="DEBUG" /> 
+	<logger name="com.stock" level="debug" /> 
 
 	<!-- root level="INFO"-->
  

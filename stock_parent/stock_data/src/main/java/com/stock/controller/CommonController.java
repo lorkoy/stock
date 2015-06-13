@@ -23,9 +23,10 @@ public class CommonController {
 	
 	@RequestMapping("common")
 	public Message common(){
-		String [] beans = ApplicationContextHodler.getContext().getBeanDefinitionNames();
-		for(String name:beans){
-			System.out.println(name);
+		try {
+			dataService.parseStockCode();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		Message msg = new Message();
 		return msg;

@@ -31,4 +31,6 @@ public interface StockInfoMapper {
     int updateByPrimaryKeySelective(StockInfo record);
 
     int updateByPrimaryKey(StockInfo record);
+    
+    int batchInsert(final List<StockInfo> list);
 }

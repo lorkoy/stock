@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50543
 File Encoding         : 65001
 
-Date: 2015-06-10 02:24:40
+Date: 2015-06-13 12:56:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,3 +36,9 @@ CREATE TABLE `stock_info` (
   `week` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- View structure for week_stock_info
+-- ----------------------------
+DROP VIEW IF EXISTS `week_stock_info`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `week_stock_info` AS select code,max(highest) as highest,MIN(lowest) as lowest ,SUM(vol) as vol,SUM(closingCost) as closingCost,week from stock_info where highest != 0 group by code,week ORDER BY code ;

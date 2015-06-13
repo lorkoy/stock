@@ -26,10 +26,11 @@ public class StockDataJob {
 	 * @author ray 每分钟获取一次股票实时数据 2015年6月11日 下午1:46:41
 	 */
 	// @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
-	@Scheduled(cron = "0 0/1,38 * ? * MON-FRI")
+	@Scheduled(cron = "0 0/1,* * ? * MON-FRI")
 	public void stockDataJob() {
-		jobSwith();
+//		jobSwith();
 		logger.debug("get stock data job start at {}", new Date());
+		
 		StockCode code = new StockCode();
 		code.setCode("sh600108,sh601998");
 		// try {

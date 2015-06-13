@@ -12,11 +12,12 @@ public class StockDataQueen {
 	
 	private BlockingQueue<StockCode> queen;
 	private ThreadPoolExecutor executor;
-	private int poolSize = 10;
+	private int poolSize = 15;
+	private int maxPoolSize = 20;
 	
 	public StockDataQueen(){
 		this.queen = new LinkedBlockingQueue<StockCode>();
-		this.executor = new ThreadPoolExecutor(poolSize, 10, 200,
+		this.executor = new ThreadPoolExecutor(poolSize, maxPoolSize, 200,
 				TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(100));
 	}
 	
