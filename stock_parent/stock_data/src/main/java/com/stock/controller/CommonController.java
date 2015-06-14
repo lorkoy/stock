@@ -1,6 +1,9 @@
 package com.stock.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,22 +19,13 @@ import com.stock.spring.ApplicationContextHodler;
 @RestController
 public class CommonController {
 	
-	@Autowired
-	private DataService dataService;
-	
-	@Autowired
-	private StockService stockService;
-	
 	@RequestMapping("common")
-	public Message common(){
-//		stockService.saveStock();
-		try {
-			dataService.service();
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String common(HttpServletRequest request){
+		String msg = request.getParameter("msg");
+		if(StringUtils.isEmpty(msg)){
+			return "index";
 		}
-		Message msg = new Message();
-		return msg;
+		return "index";
 	}
 
 }

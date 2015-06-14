@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.stock.cache.CacheManager;
 import com.stock.data.Common;
 import com.stock.data.queen.work.StockDataQueen;
 import com.stock.db.entity.Stock;
@@ -22,8 +23,6 @@ import com.stock.exception.ExUtils;
 @Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor=Exception.class)
 public class DataService {
 	
-	@Autowired
-	private StockMapper stockMapper;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataService.class);
@@ -48,9 +47,9 @@ public class DataService {
 	 */
 	private void parseStockCode() throws Exception{
 		int counter = 0;
-		StockExample example = new StockExample();
-		example.createCriteria();
-		List<Stock> stocks = stockMapper.selectByExample(example);
+		
+		@SuppressWarnings("unchecked")
+		List<Stock> stocks = (List<Stock>) CacheManager.getInstance().getCache().get("code");
 		String codeStr = "";
 		for(int i = 0;i<stocks.size();i++){
 			Stock s = stocks.get(i);

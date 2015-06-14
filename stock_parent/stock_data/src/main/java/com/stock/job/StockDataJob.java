@@ -10,8 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import com.stock.data.biz.DataService;
 import com.stock.dto.StockCode;
@@ -20,7 +23,7 @@ import com.stock.spring.ApplicationContextHodler;
 @Configuration
 @EnableScheduling
 @Lazy(false)
-public class StockDataJob {
+public class StockDataJob{
 	private static final Logger logger = LoggerFactory.getLogger(StockDataJob.class);
 
 	@Autowired
@@ -32,7 +35,7 @@ public class StockDataJob {
 	 * 2015年6月11日 下午1:46:41
 	 */
 	// @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
-	@Scheduled(cron = "0 0/1,* * ? * MON-FRI")
+	@Scheduled(cron = "0 0/1,* * ? * *")
 	public void stockDataJob() {
 //		jobSwith();
 		logger.debug("get stock data job start at {}", new Date());
@@ -61,5 +64,6 @@ public class StockDataJob {
 		}
 
 	}
+
 
 }

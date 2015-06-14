@@ -12,7 +12,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
- * @author think
+ * @author ray
  *
  */
 //@Component
