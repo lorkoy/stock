@@ -34,12 +34,12 @@ public class StockDataJob{
 	 * @author ray 每分钟获取一次股票实时数据 
 	 * 2015年6月11日 下午1:46:41
 	 */
-	// @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
-	@Scheduled(cron = "0 0/1,* * ? * *")
+	 @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
 	public void stockDataJob() {
-//		jobSwith();
-		logger.debug("get stock data job start at {}", new Date());
-		dataService.service();
+		if(jobSwith()){
+			logger.debug("get stock data job start at {}", new Date());
+			dataService.service();
+		}
 	}
 
 	
@@ -49,20 +49,17 @@ public class StockDataJob{
 	 * 
 	 *@date 2015年6月14日 上午12:35:17
 	 */
-	public void jobSwith() {
+	public boolean jobSwith() {
 		Calendar cal = Calendar.getInstance();
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int min = cal.get(Calendar.MINUTE);
-		if (min == 40) {
-			try {
-				Scheduler job = (Scheduler) ApplicationContextHodler.getBean("scheduler");
-				job.shutdown();
-				logger.info("get stock data job stop at {}", new Date());
-			} catch (SchedulerException e) {
-				e.printStackTrace();
-			}
-
+		if(hour >= 11 && hour <13 && min >30){
+			return false;
 		}
-
+		if(hour >= 15 && min >0){
+			return false;
+		}
+		return true;
 	}
 
 

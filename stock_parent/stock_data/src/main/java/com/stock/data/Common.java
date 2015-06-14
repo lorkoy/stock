@@ -10,4 +10,7 @@ public class Common {
 	//深证股票代码开头
 	public static final String SZ_CODE_PREFIX = "0";
 	
+	public static final int MACD_FAST = 12;
+	public static final int MACD_SLOW = 26;
+	
 }

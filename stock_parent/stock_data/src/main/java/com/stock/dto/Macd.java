@@ -14,7 +14,13 @@ public class Macd {
 	private double dea;
 	private double bar;
 	
-	
+	public Macd(double ema1,double ema2,double diff,double dea,double bar){
+		this.ema1 = ema1;
+		this.ema2 = ema2;
+		this.bar = bar;
+		this.diff = diff;
+		this.dea = dea;
+	}
 	
 	public double getEma1() {
 		return ema1;
