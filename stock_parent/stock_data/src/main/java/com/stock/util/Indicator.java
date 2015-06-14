@@ -3,7 +3,7 @@
  */
 package com.stock.util;
 
-import com.stock.data.Common;
+import com.stock.common.Common;
 import com.stock.dto.Macd;
 
 /**

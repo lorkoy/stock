@@ -32,121 +32,116 @@ public class StockInfo {
 
     private Integer week;
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getClosing() {
-        return closing;
-    }
+	public String getClosing() {
+		return closing;
+	}
 
-    public void setClosing(String closing) {
-        this.closing = closing == null ? null : closing.trim();
-    }
+	public void setClosing(String closing) {
+		this.closing = closing;
+	}
 
-    public String getOpen() {
-        return open;
-    }
+	public String getOpen() {
+		return open;
+	}
 
-    public void setOpen(String open) {
-        this.open = open == null ? null : open.trim();
-    }
+	public void setOpen(String open) {
+		this.open = open;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public String getLowest() {
-        return lowest;
-    }
+	public String getLowest() {
+		return lowest;
+	}
 
-    public void setLowest(String lowest) {
-        this.lowest = lowest == null ? null : lowest.trim();
-    }
+	public void setLowest(String lowest) {
+		this.lowest = lowest;
+	}
 
-    public String getHighest() {
-        return highest;
-    }
+	public String getHighest() {
+		return highest;
+	}
 
-    public void setHighest(String highest) {
-        this.highest = highest == null ? null : highest.trim();
-    }
+	public void setHighest(String highest) {
+		this.highest = highest;
+	}
 
-    public String getCurrent() {
-        return current;
-    }
+	public String getCurrent() {
+		return current;
+	}
 
-    public void setCurrent(String current) {
-        this.current = current == null ? null : current.trim();
-    }
+	public void setCurrent(String current) {
+		this.current = current;
+	}
 
-    public String getPreclose() {
-        return preclose;
-    }
+	public String getPreclose() {
+		return preclose;
+	}
 
-    public void setPreclose(String preclose) {
-        this.preclose = preclose == null ? null : preclose.trim();
-    }
+	public void setPreclose(String preclose) {
+		this.preclose = preclose;
+	}
 
-    public String getVol() {
-        return vol;
-    }
+	public String getVol() {
+		return vol;
+	}
 
-    public void setVol(String vol) {
-        this.vol = vol == null ? null : vol.trim();
-    }
+	public void setVol(String vol) {
+		this.vol = vol;
+	}
 
-    public String getClosingcost() {
-        return closingcost;
-    }
+	public String getClosingcost() {
+		return closingcost;
+	}
 
-    public void setClosingcost(String closingcost) {
-        this.closingcost = closingcost == null ? null : closingcost.trim();
-    }
+	public void setClosingcost(String closingcost) {
+		this.closingcost = closingcost;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public String getTime() {
-        return time;
-    }
+	public String getTime() {
+		return time;
+	}
 
-    public void setTime(String time) {
-        this.time = time == null ? null : time.trim();
-    }
+	public void setTime(String time) {
+		this.time = time;
+	}
 
-    public Integer getWeek() {
-        return week;
-    }
+	public Integer getWeek() {
+		return week;
+	}
 
-    public void setWeek(Integer week) {
-        this.week = week;
-    }
+	public void setWeek(Integer week) {
+		this.week = week;
+	}
     
-//    public StockInfo(String info){
-//    	infoHandler(info);
-//	}
-	
-
 }

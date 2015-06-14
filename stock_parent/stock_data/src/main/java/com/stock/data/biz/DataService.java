@@ -10,10 +10,13 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stock.cache.CacheManager;
-import com.stock.data.Common;
+import com.stock.common.Common;
 import com.stock.data.queen.work.StockDataQueen;
 import com.stock.db.entity.Stock;
 import com.stock.db.entity.StockExample;
+import com.stock.db.entity.StockInfo;
+import com.stock.db.entity.StockInfoExample;
+import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.db.mybatis.StockMapper;
 import com.stock.dto.StockCode;
 import com.stock.exception.ExUtils;
@@ -23,7 +26,8 @@ import com.stock.exception.ExUtils;
 @Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor=Exception.class)
 public class DataService {
 	
-	
+	@Autowired
+	private StockInfoMapper stockInfoMapper;
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataService.class);
 	private static final int count = 50;
@@ -78,5 +82,10 @@ public class DataService {
 		}
 	}
 	
-	
+	public List<StockInfo> queryStockInfo(){
+		StockInfoExample example = new StockInfoExample();
+		example.createCriteria().andCurrentGreaterThan("0");
+		example.setOrderByClause("create_date,code");
+		return stockInfoMapper.selectByExample(example);
+	}
 }

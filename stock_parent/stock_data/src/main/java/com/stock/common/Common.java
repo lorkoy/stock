@@ -1,4 +1,4 @@
-package com.stock.data;
+package com.stock.common;
 
 public class Common {
 	
@@ -12,5 +12,8 @@ public class Common {
 	
 	public static final int MACD_FAST = 12;
 	public static final int MACD_SLOW = 26;
+	
+	public static final int SUCCESS = 1;
+	public static final int FAILED = -1;
 	
 }

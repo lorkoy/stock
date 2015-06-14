@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.stock.data.Common;
+import com.stock.common.Common;
 import com.stock.db.entity.Stock;
 import com.stock.db.mybatis.StockMapper;
 

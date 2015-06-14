@@ -14,7 +14,7 @@ import java.util.concurrent.BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.stock.data.Common;
+import com.stock.common.Common;
 import com.stock.db.entity.StockInfo;
 import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.StockCode;

@@ -1,31 +1,45 @@
 package com.stock.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.stock.common.Common;
 import com.stock.data.biz.DataService;
-import com.stock.data.biz.StockService;
-import com.stock.data.queen.work.StockDataQueen;
-import com.stock.db.mybatis.StockInfoMapper;
-import com.stock.dto.Message;
-import com.stock.spring.ApplicationContextHodler;
+import com.stock.db.entity.StockInfo;
 
 
-@RestController
+@Controller
 public class CommonController {
+	
+	@Autowired
+	private DataService dataService;
 	
 	@RequestMapping("common")
 	public String common(HttpServletRequest request){
 		String msg = request.getParameter("msg");
 		if(StringUtils.isEmpty(msg)){
-			return "index";
+			return "/index";
 		}
-		return "index";
+		return "/index";
+	}
+	
+	@RequestMapping("index.do")
+	@ResponseBody
+	public Map<String,Object> queryStockInfo(){
+		Map<String,Object> result = new HashMap<String, Object>();
+		List<StockInfo> stockInfos = dataService.queryStockInfo();
+		result.put("list", stockInfos);
+		result.put("ok", Common.SUCCESS);
+		return result;
 	}
 
 }

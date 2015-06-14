@@ -3,7 +3,8 @@ package com.stock.db.entity;
 import java.util.Date;
 
 public class Stock {
-    private Integer id;
+
+	private Integer id;
 
     private String code;
 
