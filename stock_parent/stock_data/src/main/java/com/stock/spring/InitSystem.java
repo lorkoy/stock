@@ -25,8 +25,7 @@ public class InitSystem implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	private StockMapper stockMapper;
-
-
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		

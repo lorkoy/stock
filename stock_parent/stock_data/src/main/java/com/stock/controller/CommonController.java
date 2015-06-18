@@ -42,5 +42,15 @@ public class CommonController {
 		result.put("ok", Common.SUCCESS);
 		return result;
 	}
+	
+	@RequestMapping("table")
+	public String table(HttpServletRequest request){
+		String msg = request.getParameter("msg");
+//		dataService.service();
+		if(StringUtils.isEmpty(msg)){
+			return "/table";
+		}
+		return "/table";
+	}
 
 }

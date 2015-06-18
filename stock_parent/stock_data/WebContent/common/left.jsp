@@ -1,11 +1,10 @@
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+ <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="${pageContext.request. contextPath}/AdminLTE/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="${pageContext.request. contextPath}/AdminLTE-2.1.1/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
@@ -42,14 +41,14 @@
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
               </ul>
             </li>
             <li>
-              <a href="${pageContext.request. contextPath}/AdminLTE/pages/widgets.html">
+              <a href="pages/widgets.html">
                 <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
               </a>
             </li>
@@ -60,10 +59,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -73,12 +72,12 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="${pageContext.request. contextPath}/AdminLTE/pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
               </ul>
             </li>
             <li class="treeview">

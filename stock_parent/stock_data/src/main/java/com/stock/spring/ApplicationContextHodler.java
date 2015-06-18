@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class ApplicationContextHodler implements ApplicationContextAware {
 	private static ApplicationContext context;// 声明一个静态变量保存
 
-	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		context = applicationContext;
