@@ -26,6 +26,7 @@ public class CommonController {
 	@RequestMapping("common")
 	public String common(HttpServletRequest request){
 		String msg = request.getParameter("msg");
+//		dataService.service();
 		if(StringUtils.isEmpty(msg)){
 			return "/index";
 		}

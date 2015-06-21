@@ -19,18 +19,18 @@ import com.stock.SpringTestCase;
 @ContextConfiguration({ "/spring/applicationContext.xml" })
 public class JobTest extends SpringTestCase{
 	
-	@Test
-	@Scheduled(cron="* 0/1 * * * *")
-	@Lazy(true)
-	public void jobTest(){
-		System.out.println("job start ..."+new Date());
-	}
-	
-	
-	@Test
-	public void testService(){
-		System.out.println("test");
-	}
+//	@Test
+//	@Scheduled(cron="* 0/1 * * * *")
+//	@Lazy(true)
+//	public void jobTest(){
+//		System.out.println("job start ..."+new Date());
+//	}
+//	
+//	
+//	@Test
+//	public void testService(){
+//		System.out.println("test");
+//	}
 	
 	
 	

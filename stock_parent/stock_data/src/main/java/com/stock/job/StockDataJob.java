@@ -34,7 +34,8 @@ public class StockDataJob{
 	 * @author ray 每分钟获取一次股票实时数据 
 	 * 2015年6月11日 下午1:46:41
 	 */
-	 @Scheduled(cron="0 0/1,30,00 9,13 ? * MON-FRI")
+//	 @Scheduled(cron="0 0/1,0,38 13-21 ? * MON-FRI")
+	@Scheduled(cron="0 0/1,* * ? * MON-FRI")
 	public void stockDataJob() {
 		if(jobSwith()){
 			logger.debug("get stock data job start at {}", new Date());
@@ -53,7 +54,10 @@ public class StockDataJob{
 		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int min = cal.get(Calendar.MINUTE);
-		if(hour >= 11 && hour <13 && min >30){
+		if(hour == 11 && min >30 ){
+			return false;
+		}
+		if(hour >11 && hour <13){
 			return false;
 		}
 		if(hour >= 15 && min >0){
