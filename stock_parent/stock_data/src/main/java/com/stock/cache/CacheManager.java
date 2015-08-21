@@ -3,8 +3,11 @@
  */
 package com.stock.cache;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.stock.db.entity.Stock;
 
 /**
  * @author think
@@ -13,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CacheManager {
 	
 	private static CacheManager manager;
-	private Map<String,Object> cache = new ConcurrentHashMap<String, Object>();
+	private Map<String,List<Stock>> cache = new ConcurrentHashMap<String, List<Stock>>();
 	
 	private CacheManager(){
 		
@@ -29,14 +32,14 @@ public class CacheManager {
 	/**
 	 * @return the cache
 	 */
-	public Map<String,Object> getCache() {
+	public Map<String,List<Stock>> getCache() {
 		return cache;
 	}
 
 	/**
 	 * @param cache the cache to set
 	 */
-	public void setCache(Map<String,Object> cache) {
+	public void setCache(Map<String,List<Stock>> cache) {
 		this.cache = cache;
 	}
 

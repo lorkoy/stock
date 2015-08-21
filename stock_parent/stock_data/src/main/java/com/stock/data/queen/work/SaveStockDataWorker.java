@@ -1,9 +1,6 @@
 package com.stock.data.queen.work;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,13 +11,14 @@ import java.util.concurrent.BlockingQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.stock.common.Common;
 import com.stock.db.entity.StockInfo;
 import com.stock.db.mybatis.StockInfoMapper;
 import com.stock.dto.StockCode;
 import com.stock.exception.ExUtils;
 import com.stock.spring.ApplicationContextHodler;
 import com.stock.util.DateUtils;
+import com.stock.util.HttpUtils;
+import com.stock.util.PropertiesUtil;
 import com.stock.util.StringUtil;
 
 
@@ -38,9 +36,8 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 		try {
 			final List<StockInfo> stocks = queryStockInfo(code.getCode());
 			stockInfoMapper.batchInsert(stocks);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(ExUtils.printExAsString(e));
-			logger.debug(ExUtils.printExAsString(e));
 		}
 		
 	}
@@ -55,17 +52,8 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 	public List<StockInfo> queryStockInfo(String code) throws IOException{
 		logger.info("query code is {}",code);
 		List<StockInfo> stocks = new ArrayList<StockInfo>();
-		InputStream is = null;
-		byte[] b = new byte[256];
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
-			URL url = new URL(Common.STOCK_URL+code);
-			is = url.openStream();
-			int i = -1;
-			while((i = is.read(b)) != -1){
-				out.write(b,0,i);
-			}
-			String[] result = out.toString().split("var hq_str");
+			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url"), code).split("var hq_str");
 			for(String str:result){
 				String[] info = str.split("=");
 				if (info.length == 2&& StringUtil.replaceBlank(info[1]).length()>3) {
@@ -75,11 +63,7 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 				}
 			}
 		} catch (Exception e) {
-			logger.error(ExUtils.printExAsString(e));
-		}finally{
-			if(is != null){
-				is.close();
-			}
+			e.printStackTrace();
 		}
 		
 		return stocks;

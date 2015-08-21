@@ -13,17 +13,15 @@ import com.stock.cache.CacheManager;
 import com.stock.common.Common;
 import com.stock.data.queen.work.StockDataQueen;
 import com.stock.db.entity.Stock;
-import com.stock.db.entity.StockExample;
 import com.stock.db.entity.StockInfo;
 import com.stock.db.entity.StockInfoExample;
 import com.stock.db.mybatis.StockInfoMapper;
-import com.stock.db.mybatis.StockMapper;
 import com.stock.dto.StockCode;
 import com.stock.exception.ExUtils;
 
 
 @Component("dataService")
-@Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor=Exception.class)
+@Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor={Exception.class})
 public class DataService {
 	
 	@Autowired
@@ -37,13 +35,13 @@ public class DataService {
 			parseStockCode();
 		} catch (Exception e) {
 			logger.error(ExUtils.printExAsString(e));
-			logger.debug("parse code error");
+			logger.error("parse code error");
 		}
 		
 	}
 	
 	/**
-	 * 将股票代码组装成请求需要的格式
+	 * 将股票代码组装成请求需要的格式，放入队列
 	 *@author ray
 	 *@throws Exception
 	 * 
@@ -52,8 +50,7 @@ public class DataService {
 	private void parseStockCode() throws Exception{
 		int counter = 0;
 		
-		@SuppressWarnings("unchecked")
-		List<Stock> stocks = (List<Stock>) CacheManager.getInstance().getCache().get("code");
+		List<Stock> stocks = CacheManager.getInstance().getCache().get("code");
 		String codeStr = "";
 		for(int i = 0;i<stocks.size();i++){
 			Stock s = stocks.get(i);
@@ -88,4 +85,5 @@ public class DataService {
 		example.setOrderByClause("create_date,code");
 		return stockInfoMapper.selectByExample(example);
 	}
+	
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.stock.common.Common;
 import com.stock.data.biz.DataService;
 import com.stock.db.entity.StockInfo;
+import com.stock.exception.BizException;
+import com.stock.util.PropertiesUtil;
 
 
 @Controller
@@ -46,11 +48,13 @@ public class CommonController {
 	@RequestMapping("table")
 	public String table(HttpServletRequest request){
 		String msg = request.getParameter("msg");
+		String url = PropertiesUtil.getInstance().get("stock_info_url");
+		System.out.println(url);
 //		dataService.service();
 		if(StringUtils.isEmpty(msg)){
 			return "/table";
 		}
 		return "/table";
 	}
-
+	
 }

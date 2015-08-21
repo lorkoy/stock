@@ -3,22 +3,18 @@ package com.stock.job;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
+import org.apache.catalina.tribes.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import com.stock.data.biz.DataService;
-import com.stock.dto.StockCode;
-import com.stock.spring.ApplicationContextHodler;
+import com.stock.util.HttpUtils;
+import com.stock.util.PropertiesUtil;
 
 @Configuration
 @EnableScheduling
@@ -64,6 +60,28 @@ public class StockDataJob{
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * 资金流向
+	 *@author ray
+	 * 
+	 *2015年8月21日 下午1:45:47
+	 */
+	@Scheduled(cron="0 * 20 0/1 * MON-FRI")
+	public void saveCapital(){
+		String url = PropertiesUtil.getInstance().get("capital_info_url");
+		StringBuffer sb = new StringBuffer(url);
+		sb.replace(sb.indexOf("{stockCode}"), sb.indexOf("{stockCode}")+"{stockCode}".length(), "601989");
+		sb.replace(sb.indexOf("{rt}"), sb.length(), "1");
+		try {
+			String result = HttpUtils.sendHttpRequest(sb.toString(), "");
+			String[] info = result.split("\n");
+			System.out.println(info[info.length-2]);
+			System.out.println(Arrays.toString(info));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
