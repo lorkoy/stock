@@ -28,12 +28,12 @@ public class HttpUtils {
 	 * 
 	 *2015年8月21日 上午11:51:11
 	 */
-	public static String sendHttpRequest(String _url,String param) throws Exception{
+	public static String sendHttpRequest(String _url,String charset) throws Exception{
 		InputStream is = null;
 		byte[] b = new byte[1024];
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
-			URL url = new URL(_url+param);
+			URL url = new URL(_url);
 			is = url.openStream();
 			int i = -1;
 			while((i = is.read(b)) != -1){
@@ -52,8 +52,12 @@ public class HttpUtils {
 				}
 			}
 		}
-		return out.toString();
+		return out.toString(charset);
 	}
 	
+	
+	public static void main(String[] args) {
+		
+	}
 
 }

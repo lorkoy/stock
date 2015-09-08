@@ -1,13 +1,16 @@
 package com.stock.data.queen.work;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
+import org.joda.time.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,13 +53,12 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 	 * @throws IOException
 	 */
 	public List<StockInfo> queryStockInfo(String code) throws IOException{
-		logger.info("query code is {}",code);
 		List<StockInfo> stocks = new ArrayList<StockInfo>();
 		try {
-			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url"), code).split("var hq_str");
+			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url")+ code,"gbk").split("var hq_str");
 			for(String str:result){
 				String[] info = str.split("=");
-				if (info.length == 2&& StringUtil.replaceBlank(info[1]).length()>3) {
+				if (info.length >= 2&& StringUtil.replaceBlank(info[1]).length()>8) {
 					logger.info("query stock info result is {} and result length is {}",info[1], info[1].length());
 					StockInfo stock = createStockInfo(info[1],info[0].substring(3,info[0].length()));
 					stocks.add(stock);
@@ -65,7 +67,6 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return stocks;
 	}
 	/*	*
@@ -106,14 +107,38 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 		sc.setCurrent(infos[3]);
 		sc.setHighest(infos[4]);
 		sc.setLowest(infos[5]);
-		sc.setVol( infos[8]);
+		sc.setVol(infos[8]);
 		sc.setClosingcost(infos[9]);
+		String dateStr = infos[30]+" "+infos[31];
 		Date date = DateUtils.parseDate(infos[30], "yyyy-MM-dd");
 		sc.setDate(date);
-		sc.setTime(infos[31]);
+		//UNIX 时间戳
+		long unitStamp = DateUtils.parseDate(dateStr, "yyyy-MM-dd HH:mm:ss").getTime()/1000;
+		sc.setTime(String.valueOf(unitStamp));
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		sc.setWeek(cal.get(Calendar.WEEK_OF_YEAR));
 		return sc;
+	}
+	
+	public static void main(String[] args) {
+		String code = "sh601989";
+		try {
+			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url")+ code,"gbk").split("var hq_str");
+			System.out.println(Arrays.toString(result));
+			for(String str:result){
+				String[] info = str.split("=");
+				if (info.length >= 2&& StringUtil.replaceBlank(info[1]).length()>8) {
+					logger.info("query stock info result is {} and result length is {}",info[1], info[1].length());
+					String[] infos = info[1].split(",");
+					String dateStr = infos[30]+" "+infos[31];
+					//UNIX 时间戳
+					long unixStamp = DateUtils.parseDate(dateStr, "yyyy-MM-dd HH:mm:ss").getTime()/1000;
+					System.out.println(unixStamp);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

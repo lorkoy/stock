@@ -34,7 +34,7 @@ public class StockDataJob{
 	@Scheduled(cron="0 0/1,* * ? * MON-FRI")
 	public void stockDataJob() {
 		if(jobSwith()){
-			logger.debug("get stock data job start at {}", new Date());
+			logger.info("get stock data job start at {}", new Date());
 			dataService.service();
 		}
 	}
@@ -56,7 +56,10 @@ public class StockDataJob{
 		if(hour >11 && hour <13){
 			return false;
 		}
-		if(hour >= 15 && min >0){
+		if(hour >15){
+			return false;
+		}
+		if(hour >= 15 && min > 0){
 			return false;
 		}
 		return true;
@@ -75,7 +78,7 @@ public class StockDataJob{
 		sb.replace(sb.indexOf("{stockCode}"), sb.indexOf("{stockCode}")+"{stockCode}".length(), "601989");
 		sb.replace(sb.indexOf("{rt}"), sb.length(), "1");
 		try {
-			String result = HttpUtils.sendHttpRequest(sb.toString(), "");
+			String result = HttpUtils.sendHttpRequest(sb.toString(),"gbk");
 			String[] info = result.split("\n");
 			System.out.println(info[info.length-2]);
 			System.out.println(Arrays.toString(info));

@@ -27,10 +27,10 @@ public class JobTest extends SpringTestCase{
 //	}
 //	
 //	
-//	@Test
-//	public void testService(){
-//		System.out.println("test");
-//	}
+	@Test
+	public void testService(){
+		System.out.println("test");
+	}
 	
 	
 	
