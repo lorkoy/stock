@@ -1,48 +1,58 @@
-package com.stock.data.queen.work;
+/**
+ * 
+ */
+package com.stock.data;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.BlockingQueue;
 
-import org.joda.time.DateTimeUtils;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
+import com.stock.SpringTestCase;
+import com.stock.cache.CacheManager;
+import com.stock.common.Common;
+import com.stock.data.biz.DataService;
+import com.stock.data.biz.StockService;
+import com.stock.data.queen.work.MinStockDataWorker;
 import com.stock.db.entity.StockInfo;
-import com.stock.db.mybatis.StockInfoMapper;
-import com.stock.dto.StockCode;
 import com.stock.exception.ExUtils;
-import com.stock.spring.ApplicationContextHodler;
 import com.stock.util.DateUtils;
-import com.stock.util.HttpUtils;
-import com.stock.util.PropertiesUtil;
 import com.stock.util.StringUtil;
 
-
-public class SaveStockDataWorker extends Worker<StockCode> {
+/**
+ * @author think
+ *
+ */
+@ContextConfiguration({ "/spring/applicationContext.xml" })
+public class DateServiceTest extends SpringTestCase{
+	private static final Logger logger = LoggerFactory.getLogger(DateServiceTest.class);
 	
-	private static final Logger logger = LoggerFactory.getLogger(SaveStockDataWorker.class);
+	@Autowired
+	private DataService dataService;
+//	
+//	@Autowired
+//	private StockService stockService;
 	
-	public SaveStockDataWorker(BlockingQueue<StockCode> queen){
-		super(queen);
-	}
-	
-	@Override
-	void doWork(StockCode code) {
-		StockInfoMapper stockInfoMapper = (StockInfoMapper) ApplicationContextHodler.getBean("stockInfoMapper");
+	@Test
+	public void testParse(){
 		try {
-			final List<StockInfo> stocks = queryStockInfo(code.getCode());
-			stockInfoMapper.batchInsert(stocks);
-		} catch (Exception e) {
-			logger.error(ExUtils.printExAsString(e));
+			dataService.service();
+			queryStockInfo("sh600108");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
 	}
 	
 	/**
@@ -54,19 +64,32 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 	 */
 	public List<StockInfo> queryStockInfo(String code) throws IOException{
 		List<StockInfo> stocks = new ArrayList<StockInfo>();
+		InputStream is = null;
+		byte[] b = new byte[256];
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
-			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url")+ code,"gbk").split("var hq_str");
+			URL url = new URL(Common.STOCK_URL+code);
+			is = url.openStream();
+			int i = -1;
+			while((i = is.read(b)) != -1){
+				out.write(b,0,i);
+			}
+			String[] result = out.toString().split("var hq_str");
 			for(String str:result){
 				String[] info = str.split("=");
-				if (info.length >= 2&& StringUtil.replaceBlank(info[1]).length()>8) {
-					logger.info("query stock info result is {} and result length is {}",info[1], info[1].length());
+				if (info.length == 2&& StringUtil.replaceBlank(info[1]).length()>3) {
 					StockInfo stock = createStockInfo(info[1],info[0].substring(3,info[0].length()));
 					stocks.add(stock);
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(ExUtils.printExAsString(e));
+		}finally{
+			if(is != null){
+				is.close();
+			}
 		}
+		
 		return stocks;
 	}
 	/*	*
@@ -107,38 +130,15 @@ public class SaveStockDataWorker extends Worker<StockCode> {
 		sc.setCurrent(infos[3]);
 		sc.setHighest(infos[4]);
 		sc.setLowest(infos[5]);
-		sc.setVol(infos[8]);
+		sc.setVol( infos[8]);
 		sc.setClosingcost(infos[9]);
-		String dateStr = infos[30]+" "+infos[31];
 		Date date = DateUtils.parseDate(infos[30], "yyyy-MM-dd");
 		sc.setDate(date);
-		//UNIX 时间戳
-		long unitStamp = DateUtils.parseDate(dateStr, "yyyy-MM-dd HH:mm:ss").getTime()/1000;
-		sc.setTime(String.valueOf(unitStamp));
+		sc.setTime(infos[31]);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		sc.setWeek(cal.get(Calendar.WEEK_OF_YEAR));
 		return sc;
 	}
-	
-	public static void main(String[] args) {
-		String code = "sh601989";
-		try {
-			String[] result = HttpUtils.sendHttpRequest(PropertiesUtil.getInstance().get("stock_info_url")+ code,"gbk").split("var hq_str");
-			System.out.println(Arrays.toString(result));
-			for(String str:result){
-				String[] info = str.split("=");
-				if (info.length >= 2&& StringUtil.replaceBlank(info[1]).length()>8) {
-					logger.info("query stock info result is {} and result length is {}",info[1], info[1].length());
-					String[] infos = info[1].split(",");
-					String dateStr = infos[30]+" "+infos[31];
-					//UNIX 时间戳
-					long unixStamp = DateUtils.parseDate(dateStr, "yyyy-MM-dd HH:mm:ss").getTime()/1000;
-					System.out.println(unixStamp);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 }

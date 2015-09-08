@@ -47,21 +47,27 @@ public class StockDataJob{
 	 *@date 2015年6月14日 上午12:35:17
 	 */
 	public boolean jobSwith() {
-		Calendar cal = Calendar.getInstance();
-		int hour = cal.get(Calendar.HOUR_OF_DAY);
-		int min = cal.get(Calendar.MINUTE);
-		if(hour == 11 && min >30 ){
-			return false;
-		}
-		if(hour >11 && hour <13){
-			return false;
-		}
-		if(hour >15){
-			return false;
-		}
-		if(hour >= 15 && min > 0){
-			return false;
-		}
+//		Calendar cal = Calendar.getInstance();
+//		int hour = cal.get(Calendar.HOUR_OF_DAY);
+//		int min = cal.get(Calendar.MINUTE);
+//		if(hour == 11 && min >30 ){
+//			return false;
+//		}
+//		if(hour >11 && hour <13){
+//			return false;
+//		}
+//		
+//		if(hour >15){
+//			return false;
+//		}
+//		
+//		if(hour >=15 && min > 1){
+//			return false;
+//		}
+//		//股票信息有滞后性，所以15:10再查询一次
+//		if(hour == 15 && min == 10){
+//			return true;
+//		}
 		return true;
 	}
 	

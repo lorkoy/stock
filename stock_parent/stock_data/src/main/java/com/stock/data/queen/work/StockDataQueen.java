@@ -8,20 +8,26 @@ import java.util.concurrent.LinkedBlockingQueue;
 import com.stock.dto.StockCode;
 
 public class StockDataQueen {
-	
-	private BlockingQueue<StockCode> queen;
+	//每分钟查询股票价格的队列
+	private BlockingQueue<StockCode> minQueen;
+	//每30分钟查询股票价格的队列
+	private BlockingQueue<StockCode> halfHourQueen;
+	//每小时查询股票价格的队列
+	private BlockingQueue<StockCode> hourQueen;
+	//每两小时查询股票价格的队列
+	private BlockingQueue<StockCode> twoHourQueen;
 	private ExecutorService executorService;
 	private int poolSize = 35;
 	
 	public StockDataQueen(){
-		this.queen = new LinkedBlockingQueue<StockCode>();
+		this.minQueen = new LinkedBlockingQueue<StockCode>();
 		executorService = Executors.newCachedThreadPool();
 	}
 	
 	
 	public void startWork(){
 		for(int i=0;i<poolSize;i++){
-			SaveStockDataWorker command = new SaveStockDataWorker(queen);
+			MinStockDataWorker command = new MinStockDataWorker(minQueen);
 			executorService.execute(command);
 		}
 	}
@@ -37,11 +43,11 @@ public class StockDataQueen {
 	}
 
 	public BlockingQueue<StockCode> getQueen() {
-		return queen;
+		return minQueen;
 	}
 
 	public void setQueen(BlockingQueue<StockCode> queen) {
-		this.queen = queen;
+		this.minQueen = queen;
 	}
 
 }
