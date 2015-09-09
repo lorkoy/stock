@@ -62,7 +62,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- aop -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -87,12 +87,6 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- spring data jpa -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data-jpa.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -104,17 +98,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
-		</dependency>
-		<!-- quartz start -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>${quartz.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz-jobs</artifactId>
-			<version>${quartz.version}</version>
 		</dependency>
 
 		<dependency>
@@ -129,12 +112,24 @@
 			<artifactId>jackson-datatype-joda</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-			<!-- connection pool -->
-			<dependency>
-				<groupId>org.apache.tomcat</groupId>
-				<artifactId>tomcat-jdbc</artifactId>
-				<version>${tomcat-jdbc.version}</version>
-				<scope>runtime</scope>
-			</dependency>
+		<!-- connection pool -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>${tomcat-jdbc.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.8.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
 	</dependencies>
 </project>
