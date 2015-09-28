@@ -20,6 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import aj.org.objectweb.asm.Type;
+
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.jaxrs.json.JsonMapperConfigurator;
 import com.stock.SpringTestCase;
 import com.stock.cache.CacheManager;
 import com.stock.common.Common;
@@ -29,13 +34,14 @@ import com.stock.data.queen.work.MinStockDataWorker;
 import com.stock.db.entity.StockInfo;
 import com.stock.exception.ExUtils;
 import com.stock.util.DateUtils;
+import com.stock.util.HttpUtils;
 import com.stock.util.StringUtil;
 
 /**
  * @author think
  *
  */
-@ContextConfiguration({ "/spring/applicationContext.xml" })
+//@ContextConfiguration({ "/spring/applicationContext.xml" })
 public class DateServiceTest extends SpringTestCase{
 	private static final Logger logger = LoggerFactory.getLogger(DateServiceTest.class);
 	

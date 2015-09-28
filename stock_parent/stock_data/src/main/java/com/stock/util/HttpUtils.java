@@ -40,9 +40,9 @@ public class HttpUtils {
 				out.write(b,0,i);
 			}
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}finally{
 			if(is != null){
 				try {
