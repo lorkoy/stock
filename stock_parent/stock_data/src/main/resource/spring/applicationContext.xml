@@ -5,7 +5,6 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -16,20 +15,28 @@
 
 	<description>Spring公共配置</description>
 	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="com.stock" />
+	<context:component-scan base-package="com.stock">
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" /> -->
+	</context:component-scan>
+	<!-- <aop:aspectj-autoproxy/> -->
 	
-	
-	<!-- 扫描basePackage下所有接口 -->
+	<!-- MyBatis配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+		<property name="typeAliasesPackage" value="mybatis.entity" />
+		<!-- 显式指定Mapper文件位置 -->
+		<property name="mapperLocations" value="classpath*:/mybatis/mapper/*Mapper.xml" />
+	</bean>
+	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.stock.db.mybatis" />
+			<!-- <property name="annotationClass" value="com.stock.db.MyBatisRepository"/> -->
 	</bean>
+	
 
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
-
-	<!-- production环境 -->
-	<beans profile="production">
-		<context:property-placeholder location="classpath*:application.properties" />
+	<context:property-placeholder location="classpath*:application.properties" />
 
 		<!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
 		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
@@ -47,35 +54,11 @@
 			<property name="timeBetweenEvictionRunsMillis" value="60000" />
 			<property name="minEvictableIdleTimeMillis" value="600000" />
 		</bean>
-		<!-- MyBatis配置 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="typeAliasesPackage" value="mybatis.entity" />
-		<!-- 显式指定Mapper文件位置 -->
-		<property name="mapperLocations" value="classpath*:/mybatis/mapper/*Mapper.xml" />
+<!-- 另一个事务管理器, Jdbc单数据源事务 -->
+	<bean id="defaultTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
-		
-		
-<!-- 		 <mongo:db-factory 
-		  host="${db.host}" 
-		 port="${db.port}" 
-		 dbname="${db.database}"
-        /> -->
-
-
-    <!-- mongo模板操作对象 -->
-   <!--  <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-    </bean>
-
-    MongoDB GridFS Template 支持，操作mongodb存放的文件
-    <mongo:mapping-converter id="converter" db-factory-ref="mongoDbFactory"/>
-    <bean id="gridFsTemplate" class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
-      <constructor-arg ref="mongoDbFactory"/>
-      <constructor-arg ref="converter"/>
-    </bean> -->
-	</beans>
-
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
 
 </beans>

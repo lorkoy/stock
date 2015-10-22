@@ -27,4 +27,6 @@ public interface BankrollMapper {
     int updateByPrimaryKeySelective(Bankroll record);
 
     int updateByPrimaryKey(Bankroll record);
+    
+    int batchInsert(List<Bankroll> list);
 }

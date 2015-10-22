@@ -7,11 +7,16 @@
     <result column="year" property="year" jdbcType="VARCHAR" />
     <result column="month" property="month" jdbcType="VARCHAR" />
     <result column="date" property="date" jdbcType="VARCHAR" />
-    <result column="mainForce" property="mainforce" jdbcType="VARCHAR" />
-    <result column="large" property="large" jdbcType="VARCHAR" />
-    <result column="big" property="big" jdbcType="VARCHAR" />
-    <result column="medium" property="medium" jdbcType="VARCHAR" />
-    <result column="small" property="small" jdbcType="VARCHAR" />
+    <result column="mainForce_in" property="mainforceIn" jdbcType="VARCHAR" />
+    <result column="mainForce_out" property="mainforceOut" jdbcType="VARCHAR" />
+    <result column="large_in" property="largeIn" jdbcType="VARCHAR" />
+    <result column="large_out" property="largeOut" jdbcType="VARCHAR" />
+    <result column="big_in" property="bigIn" jdbcType="VARCHAR" />
+    <result column="big_out" property="bigOut" jdbcType="VARCHAR" />
+    <result column="medium_in" property="mediumIn" jdbcType="VARCHAR" />
+    <result column="medium_out" property="mediumOut" jdbcType="VARCHAR" />
+    <result column="small_in" property="smallIn" jdbcType="VARCHAR" />
+    <result column="small_out" property="smallOut" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -73,7 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, stock_code, year, month, date, mainForce, large, big, medium, small, create_date
+    id, stock_code, year, month, date, mainForce_in, mainForce_out, large_in, large_out, 
+    big_in, big_out, medium_in, medium_out, small_in, small_out, create_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stock.db.entity.BankrollExample" >
     select
@@ -107,13 +113,17 @@
   </delete>
   <insert id="insert" parameterType="com.stock.db.entity.Bankroll" >
     insert into bankroll (id, stock_code, year, 
-      month, date, mainForce, 
-      large, big, medium, 
-      small, create_date)
+      month, date, mainForce_in, 
+      mainForce_out, large_in, large_out, 
+      big_in, big_out, medium_in, 
+      medium_out, small_in, small_out, 
+      create_date)
     values (#{id,jdbcType=INTEGER}, #{stockCode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
-      #{month,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{mainforce,jdbcType=VARCHAR}, 
-      #{large,jdbcType=VARCHAR}, #{big,jdbcType=VARCHAR}, #{medium,jdbcType=VARCHAR}, 
-      #{small,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+      #{month,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{mainforceIn,jdbcType=VARCHAR}, 
+      #{mainforceOut,jdbcType=VARCHAR}, #{largeIn,jdbcType=VARCHAR}, #{largeOut,jdbcType=VARCHAR}, 
+      #{bigIn,jdbcType=VARCHAR}, #{bigOut,jdbcType=VARCHAR}, #{mediumIn,jdbcType=VARCHAR}, 
+      #{mediumOut,jdbcType=VARCHAR}, #{smallIn,jdbcType=VARCHAR}, #{smallOut,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.stock.db.entity.Bankroll" >
     insert into bankroll
@@ -133,20 +143,35 @@
       <if test="date != null" >
         date,
       </if>
-      <if test="mainforce != null" >
-        mainForce,
+      <if test="mainforceIn != null" >
+        mainForce_in,
       </if>
-      <if test="large != null" >
-        large,
+      <if test="mainforceOut != null" >
+        mainForce_out,
       </if>
-      <if test="big != null" >
-        big,
+      <if test="largeIn != null" >
+        large_in,
       </if>
-      <if test="medium != null" >
-        medium,
+      <if test="largeOut != null" >
+        large_out,
       </if>
-      <if test="small != null" >
-        small,
+      <if test="bigIn != null" >
+        big_in,
+      </if>
+      <if test="bigOut != null" >
+        big_out,
+      </if>
+      <if test="mediumIn != null" >
+        medium_in,
+      </if>
+      <if test="mediumOut != null" >
+        medium_out,
+      </if>
+      <if test="smallIn != null" >
+        small_in,
+      </if>
+      <if test="smallOut != null" >
+        small_out,
       </if>
       <if test="createDate != null" >
         create_date,
@@ -168,20 +193,35 @@
       <if test="date != null" >
         #{date,jdbcType=VARCHAR},
       </if>
-      <if test="mainforce != null" >
-        #{mainforce,jdbcType=VARCHAR},
+      <if test="mainforceIn != null" >
+        #{mainforceIn,jdbcType=VARCHAR},
       </if>
-      <if test="large != null" >
-        #{large,jdbcType=VARCHAR},
+      <if test="mainforceOut != null" >
+        #{mainforceOut,jdbcType=VARCHAR},
       </if>
-      <if test="big != null" >
-        #{big,jdbcType=VARCHAR},
+      <if test="largeIn != null" >
+        #{largeIn,jdbcType=VARCHAR},
       </if>
-      <if test="medium != null" >
-        #{medium,jdbcType=VARCHAR},
+      <if test="largeOut != null" >
+        #{largeOut,jdbcType=VARCHAR},
       </if>
-      <if test="small != null" >
-        #{small,jdbcType=VARCHAR},
+      <if test="bigIn != null" >
+        #{bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="bigOut != null" >
+        #{bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumIn != null" >
+        #{mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumOut != null" >
+        #{mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIn != null" >
+        #{smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="smallOut != null" >
+        #{smallOut,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
@@ -212,20 +252,35 @@
       <if test="record.date != null" >
         date = #{record.date,jdbcType=VARCHAR},
       </if>
-      <if test="record.mainforce != null" >
-        mainForce = #{record.mainforce,jdbcType=VARCHAR},
+      <if test="record.mainforceIn != null" >
+        mainForce_in = #{record.mainforceIn,jdbcType=VARCHAR},
       </if>
-      <if test="record.large != null" >
-        large = #{record.large,jdbcType=VARCHAR},
+      <if test="record.mainforceOut != null" >
+        mainForce_out = #{record.mainforceOut,jdbcType=VARCHAR},
       </if>
-      <if test="record.big != null" >
-        big = #{record.big,jdbcType=VARCHAR},
+      <if test="record.largeIn != null" >
+        large_in = #{record.largeIn,jdbcType=VARCHAR},
       </if>
-      <if test="record.medium != null" >
-        medium = #{record.medium,jdbcType=VARCHAR},
+      <if test="record.largeOut != null" >
+        large_out = #{record.largeOut,jdbcType=VARCHAR},
       </if>
-      <if test="record.small != null" >
-        small = #{record.small,jdbcType=VARCHAR},
+      <if test="record.bigIn != null" >
+        big_in = #{record.bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigOut != null" >
+        big_out = #{record.bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumIn != null" >
+        medium_in = #{record.mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumOut != null" >
+        medium_out = #{record.mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallIn != null" >
+        small_in = #{record.smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallOut != null" >
+        small_out = #{record.smallOut,jdbcType=VARCHAR},
       </if>
       <if test="record.createDate != null" >
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -242,11 +297,16 @@
       year = #{record.year,jdbcType=VARCHAR},
       month = #{record.month,jdbcType=VARCHAR},
       date = #{record.date,jdbcType=VARCHAR},
-      mainForce = #{record.mainforce,jdbcType=VARCHAR},
-      large = #{record.large,jdbcType=VARCHAR},
-      big = #{record.big,jdbcType=VARCHAR},
-      medium = #{record.medium,jdbcType=VARCHAR},
-      small = #{record.small,jdbcType=VARCHAR},
+      mainForce_in = #{record.mainforceIn,jdbcType=VARCHAR},
+      mainForce_out = #{record.mainforceOut,jdbcType=VARCHAR},
+      large_in = #{record.largeIn,jdbcType=VARCHAR},
+      large_out = #{record.largeOut,jdbcType=VARCHAR},
+      big_in = #{record.bigIn,jdbcType=VARCHAR},
+      big_out = #{record.bigOut,jdbcType=VARCHAR},
+      medium_in = #{record.mediumIn,jdbcType=VARCHAR},
+      medium_out = #{record.mediumOut,jdbcType=VARCHAR},
+      small_in = #{record.smallIn,jdbcType=VARCHAR},
+      small_out = #{record.smallOut,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -267,20 +327,35 @@
       <if test="date != null" >
         date = #{date,jdbcType=VARCHAR},
       </if>
-      <if test="mainforce != null" >
-        mainForce = #{mainforce,jdbcType=VARCHAR},
+      <if test="mainforceIn != null" >
+        mainForce_in = #{mainforceIn,jdbcType=VARCHAR},
       </if>
-      <if test="large != null" >
-        large = #{large,jdbcType=VARCHAR},
+      <if test="mainforceOut != null" >
+        mainForce_out = #{mainforceOut,jdbcType=VARCHAR},
       </if>
-      <if test="big != null" >
-        big = #{big,jdbcType=VARCHAR},
+      <if test="largeIn != null" >
+        large_in = #{largeIn,jdbcType=VARCHAR},
       </if>
-      <if test="medium != null" >
-        medium = #{medium,jdbcType=VARCHAR},
+      <if test="largeOut != null" >
+        large_out = #{largeOut,jdbcType=VARCHAR},
       </if>
-      <if test="small != null" >
-        small = #{small,jdbcType=VARCHAR},
+      <if test="bigIn != null" >
+        big_in = #{bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="bigOut != null" >
+        big_out = #{bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumIn != null" >
+        medium_in = #{mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumOut != null" >
+        medium_out = #{mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIn != null" >
+        small_in = #{smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="smallOut != null" >
+        small_out = #{smallOut,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -294,12 +369,36 @@
       year = #{year,jdbcType=VARCHAR},
       month = #{month,jdbcType=VARCHAR},
       date = #{date,jdbcType=VARCHAR},
-      mainForce = #{mainforce,jdbcType=VARCHAR},
-      large = #{large,jdbcType=VARCHAR},
-      big = #{big,jdbcType=VARCHAR},
-      medium = #{medium,jdbcType=VARCHAR},
-      small = #{small,jdbcType=VARCHAR},
+      mainForce_in = #{mainforceIn,jdbcType=VARCHAR},
+      mainForce_out = #{mainforceOut,jdbcType=VARCHAR},
+      large_in = #{largeIn,jdbcType=VARCHAR},
+      large_out = #{largeOut,jdbcType=VARCHAR},
+      big_in = #{bigIn,jdbcType=VARCHAR},
+      big_out = #{bigOut,jdbcType=VARCHAR},
+      medium_in = #{mediumIn,jdbcType=VARCHAR},
+      medium_out = #{mediumOut,jdbcType=VARCHAR},
+      small_in = #{smallIn,jdbcType=VARCHAR},
+      small_out = #{smallOut,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+    <insert id="batchInsert" parameterType="java.util.List">
+    insert into bankroll (id, stock_code, year, 
+      month, date, mainForce_in, 
+      mainForce_out, large_in, large_out, 
+      big_in, big_out, medium_in, 
+      medium_out, small_in, small_out, 
+      create_date)
+      values 
+    <foreach collection="list" item="br" separator="," index="index">
+     (#{br.id,jdbcType=INTEGER}, #{br.stockCode,jdbcType=VARCHAR}, #{br.year,jdbcType=VARCHAR}, 
+      #{br.month,jdbcType=VARCHAR}, #{br.date,jdbcType=VARCHAR}, #{br.mainforceIn,jdbcType=VARCHAR}, 
+      #{br.mainforceOut,jdbcType=VARCHAR}, #{br.largeIn,jdbcType=VARCHAR}, #{br.largeOut,jdbcType=VARCHAR}, 
+      #{br.bigIn,jdbcType=VARCHAR}, #{br.bigOut,jdbcType=VARCHAR}, #{br.mediumIn,jdbcType=VARCHAR}, 
+      #{br.mediumOut,jdbcType=VARCHAR}, #{br.smallIn,jdbcType=VARCHAR}, #{br.smallOut,jdbcType=VARCHAR}, 
+      #{br.createDate,jdbcType=TIMESTAMP})
+  </foreach>
+  </insert>
 </mapper>

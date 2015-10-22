@@ -445,353 +445,703 @@ public class BankrollExample {
             return (Criteria) this;
         }
 
-        public Criteria andMainforceIsNull() {
-            addCriterion("mainForce is null");
+        public Criteria andMainforceInIsNull() {
+            addCriterion("mainForce_in is null");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceIsNotNull() {
-            addCriterion("mainForce is not null");
+        public Criteria andMainforceInIsNotNull() {
+            addCriterion("mainForce_in is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceEqualTo(String value) {
-            addCriterion("mainForce =", value, "mainforce");
+        public Criteria andMainforceInEqualTo(String value) {
+            addCriterion("mainForce_in =", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceNotEqualTo(String value) {
-            addCriterion("mainForce <>", value, "mainforce");
+        public Criteria andMainforceInNotEqualTo(String value) {
+            addCriterion("mainForce_in <>", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceGreaterThan(String value) {
-            addCriterion("mainForce >", value, "mainforce");
+        public Criteria andMainforceInGreaterThan(String value) {
+            addCriterion("mainForce_in >", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceGreaterThanOrEqualTo(String value) {
-            addCriterion("mainForce >=", value, "mainforce");
+        public Criteria andMainforceInGreaterThanOrEqualTo(String value) {
+            addCriterion("mainForce_in >=", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceLessThan(String value) {
-            addCriterion("mainForce <", value, "mainforce");
+        public Criteria andMainforceInLessThan(String value) {
+            addCriterion("mainForce_in <", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceLessThanOrEqualTo(String value) {
-            addCriterion("mainForce <=", value, "mainforce");
+        public Criteria andMainforceInLessThanOrEqualTo(String value) {
+            addCriterion("mainForce_in <=", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceLike(String value) {
-            addCriterion("mainForce like", value, "mainforce");
+        public Criteria andMainforceInLike(String value) {
+            addCriterion("mainForce_in like", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceNotLike(String value) {
-            addCriterion("mainForce not like", value, "mainforce");
+        public Criteria andMainforceInNotLike(String value) {
+            addCriterion("mainForce_in not like", value, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceIn(List<String> values) {
-            addCriterion("mainForce in", values, "mainforce");
+        public Criteria andMainforceInIn(List<String> values) {
+            addCriterion("mainForce_in in", values, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceNotIn(List<String> values) {
-            addCriterion("mainForce not in", values, "mainforce");
+        public Criteria andMainforceInNotIn(List<String> values) {
+            addCriterion("mainForce_in not in", values, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceBetween(String value1, String value2) {
-            addCriterion("mainForce between", value1, value2, "mainforce");
+        public Criteria andMainforceInBetween(String value1, String value2) {
+            addCriterion("mainForce_in between", value1, value2, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andMainforceNotBetween(String value1, String value2) {
-            addCriterion("mainForce not between", value1, value2, "mainforce");
+        public Criteria andMainforceInNotBetween(String value1, String value2) {
+            addCriterion("mainForce_in not between", value1, value2, "mainforceIn");
             return (Criteria) this;
         }
 
-        public Criteria andLargeIsNull() {
-            addCriterion("large is null");
+        public Criteria andMainforceOutIsNull() {
+            addCriterion("mainForce_out is null");
             return (Criteria) this;
         }
 
-        public Criteria andLargeIsNotNull() {
-            addCriterion("large is not null");
+        public Criteria andMainforceOutIsNotNull() {
+            addCriterion("mainForce_out is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLargeEqualTo(String value) {
-            addCriterion("large =", value, "large");
+        public Criteria andMainforceOutEqualTo(String value) {
+            addCriterion("mainForce_out =", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeNotEqualTo(String value) {
-            addCriterion("large <>", value, "large");
+        public Criteria andMainforceOutNotEqualTo(String value) {
+            addCriterion("mainForce_out <>", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeGreaterThan(String value) {
-            addCriterion("large >", value, "large");
+        public Criteria andMainforceOutGreaterThan(String value) {
+            addCriterion("mainForce_out >", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeGreaterThanOrEqualTo(String value) {
-            addCriterion("large >=", value, "large");
+        public Criteria andMainforceOutGreaterThanOrEqualTo(String value) {
+            addCriterion("mainForce_out >=", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeLessThan(String value) {
-            addCriterion("large <", value, "large");
+        public Criteria andMainforceOutLessThan(String value) {
+            addCriterion("mainForce_out <", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeLessThanOrEqualTo(String value) {
-            addCriterion("large <=", value, "large");
+        public Criteria andMainforceOutLessThanOrEqualTo(String value) {
+            addCriterion("mainForce_out <=", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeLike(String value) {
-            addCriterion("large like", value, "large");
+        public Criteria andMainforceOutLike(String value) {
+            addCriterion("mainForce_out like", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeNotLike(String value) {
-            addCriterion("large not like", value, "large");
+        public Criteria andMainforceOutNotLike(String value) {
+            addCriterion("mainForce_out not like", value, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeIn(List<String> values) {
-            addCriterion("large in", values, "large");
+        public Criteria andMainforceOutIn(List<String> values) {
+            addCriterion("mainForce_out in", values, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeNotIn(List<String> values) {
-            addCriterion("large not in", values, "large");
+        public Criteria andMainforceOutNotIn(List<String> values) {
+            addCriterion("mainForce_out not in", values, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeBetween(String value1, String value2) {
-            addCriterion("large between", value1, value2, "large");
+        public Criteria andMainforceOutBetween(String value1, String value2) {
+            addCriterion("mainForce_out between", value1, value2, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andLargeNotBetween(String value1, String value2) {
-            addCriterion("large not between", value1, value2, "large");
+        public Criteria andMainforceOutNotBetween(String value1, String value2) {
+            addCriterion("mainForce_out not between", value1, value2, "mainforceOut");
             return (Criteria) this;
         }
 
-        public Criteria andBigIsNull() {
-            addCriterion("big is null");
+        public Criteria andLargeInIsNull() {
+            addCriterion("large_in is null");
             return (Criteria) this;
         }
 
-        public Criteria andBigIsNotNull() {
-            addCriterion("big is not null");
+        public Criteria andLargeInIsNotNull() {
+            addCriterion("large_in is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBigEqualTo(String value) {
-            addCriterion("big =", value, "big");
+        public Criteria andLargeInEqualTo(String value) {
+            addCriterion("large_in =", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigNotEqualTo(String value) {
-            addCriterion("big <>", value, "big");
+        public Criteria andLargeInNotEqualTo(String value) {
+            addCriterion("large_in <>", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigGreaterThan(String value) {
-            addCriterion("big >", value, "big");
+        public Criteria andLargeInGreaterThan(String value) {
+            addCriterion("large_in >", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigGreaterThanOrEqualTo(String value) {
-            addCriterion("big >=", value, "big");
+        public Criteria andLargeInGreaterThanOrEqualTo(String value) {
+            addCriterion("large_in >=", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigLessThan(String value) {
-            addCriterion("big <", value, "big");
+        public Criteria andLargeInLessThan(String value) {
+            addCriterion("large_in <", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigLessThanOrEqualTo(String value) {
-            addCriterion("big <=", value, "big");
+        public Criteria andLargeInLessThanOrEqualTo(String value) {
+            addCriterion("large_in <=", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigLike(String value) {
-            addCriterion("big like", value, "big");
+        public Criteria andLargeInLike(String value) {
+            addCriterion("large_in like", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigNotLike(String value) {
-            addCriterion("big not like", value, "big");
+        public Criteria andLargeInNotLike(String value) {
+            addCriterion("large_in not like", value, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigIn(List<String> values) {
-            addCriterion("big in", values, "big");
+        public Criteria andLargeInIn(List<String> values) {
+            addCriterion("large_in in", values, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigNotIn(List<String> values) {
-            addCriterion("big not in", values, "big");
+        public Criteria andLargeInNotIn(List<String> values) {
+            addCriterion("large_in not in", values, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigBetween(String value1, String value2) {
-            addCriterion("big between", value1, value2, "big");
+        public Criteria andLargeInBetween(String value1, String value2) {
+            addCriterion("large_in between", value1, value2, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andBigNotBetween(String value1, String value2) {
-            addCriterion("big not between", value1, value2, "big");
+        public Criteria andLargeInNotBetween(String value1, String value2) {
+            addCriterion("large_in not between", value1, value2, "largeIn");
             return (Criteria) this;
         }
 
-        public Criteria andMediumIsNull() {
-            addCriterion("medium is null");
+        public Criteria andLargeOutIsNull() {
+            addCriterion("large_out is null");
             return (Criteria) this;
         }
 
-        public Criteria andMediumIsNotNull() {
-            addCriterion("medium is not null");
+        public Criteria andLargeOutIsNotNull() {
+            addCriterion("large_out is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMediumEqualTo(String value) {
-            addCriterion("medium =", value, "medium");
+        public Criteria andLargeOutEqualTo(String value) {
+            addCriterion("large_out =", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumNotEqualTo(String value) {
-            addCriterion("medium <>", value, "medium");
+        public Criteria andLargeOutNotEqualTo(String value) {
+            addCriterion("large_out <>", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumGreaterThan(String value) {
-            addCriterion("medium >", value, "medium");
+        public Criteria andLargeOutGreaterThan(String value) {
+            addCriterion("large_out >", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumGreaterThanOrEqualTo(String value) {
-            addCriterion("medium >=", value, "medium");
+        public Criteria andLargeOutGreaterThanOrEqualTo(String value) {
+            addCriterion("large_out >=", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumLessThan(String value) {
-            addCriterion("medium <", value, "medium");
+        public Criteria andLargeOutLessThan(String value) {
+            addCriterion("large_out <", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumLessThanOrEqualTo(String value) {
-            addCriterion("medium <=", value, "medium");
+        public Criteria andLargeOutLessThanOrEqualTo(String value) {
+            addCriterion("large_out <=", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumLike(String value) {
-            addCriterion("medium like", value, "medium");
+        public Criteria andLargeOutLike(String value) {
+            addCriterion("large_out like", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumNotLike(String value) {
-            addCriterion("medium not like", value, "medium");
+        public Criteria andLargeOutNotLike(String value) {
+            addCriterion("large_out not like", value, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumIn(List<String> values) {
-            addCriterion("medium in", values, "medium");
+        public Criteria andLargeOutIn(List<String> values) {
+            addCriterion("large_out in", values, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumNotIn(List<String> values) {
-            addCriterion("medium not in", values, "medium");
+        public Criteria andLargeOutNotIn(List<String> values) {
+            addCriterion("large_out not in", values, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumBetween(String value1, String value2) {
-            addCriterion("medium between", value1, value2, "medium");
+        public Criteria andLargeOutBetween(String value1, String value2) {
+            addCriterion("large_out between", value1, value2, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andMediumNotBetween(String value1, String value2) {
-            addCriterion("medium not between", value1, value2, "medium");
+        public Criteria andLargeOutNotBetween(String value1, String value2) {
+            addCriterion("large_out not between", value1, value2, "largeOut");
             return (Criteria) this;
         }
 
-        public Criteria andSmallIsNull() {
-            addCriterion("small is null");
+        public Criteria andBigInIsNull() {
+            addCriterion("big_in is null");
             return (Criteria) this;
         }
 
-        public Criteria andSmallIsNotNull() {
-            addCriterion("small is not null");
+        public Criteria andBigInIsNotNull() {
+            addCriterion("big_in is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSmallEqualTo(String value) {
-            addCriterion("small =", value, "small");
+        public Criteria andBigInEqualTo(String value) {
+            addCriterion("big_in =", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallNotEqualTo(String value) {
-            addCriterion("small <>", value, "small");
+        public Criteria andBigInNotEqualTo(String value) {
+            addCriterion("big_in <>", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallGreaterThan(String value) {
-            addCriterion("small >", value, "small");
+        public Criteria andBigInGreaterThan(String value) {
+            addCriterion("big_in >", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallGreaterThanOrEqualTo(String value) {
-            addCriterion("small >=", value, "small");
+        public Criteria andBigInGreaterThanOrEqualTo(String value) {
+            addCriterion("big_in >=", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallLessThan(String value) {
-            addCriterion("small <", value, "small");
+        public Criteria andBigInLessThan(String value) {
+            addCriterion("big_in <", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallLessThanOrEqualTo(String value) {
-            addCriterion("small <=", value, "small");
+        public Criteria andBigInLessThanOrEqualTo(String value) {
+            addCriterion("big_in <=", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallLike(String value) {
-            addCriterion("small like", value, "small");
+        public Criteria andBigInLike(String value) {
+            addCriterion("big_in like", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallNotLike(String value) {
-            addCriterion("small not like", value, "small");
+        public Criteria andBigInNotLike(String value) {
+            addCriterion("big_in not like", value, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallIn(List<String> values) {
-            addCriterion("small in", values, "small");
+        public Criteria andBigInIn(List<String> values) {
+            addCriterion("big_in in", values, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallNotIn(List<String> values) {
-            addCriterion("small not in", values, "small");
+        public Criteria andBigInNotIn(List<String> values) {
+            addCriterion("big_in not in", values, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallBetween(String value1, String value2) {
-            addCriterion("small between", value1, value2, "small");
+        public Criteria andBigInBetween(String value1, String value2) {
+            addCriterion("big_in between", value1, value2, "bigIn");
             return (Criteria) this;
         }
 
-        public Criteria andSmallNotBetween(String value1, String value2) {
-            addCriterion("small not between", value1, value2, "small");
+        public Criteria andBigInNotBetween(String value1, String value2) {
+            addCriterion("big_in not between", value1, value2, "bigIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutIsNull() {
+            addCriterion("big_out is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutIsNotNull() {
+            addCriterion("big_out is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutEqualTo(String value) {
+            addCriterion("big_out =", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutNotEqualTo(String value) {
+            addCriterion("big_out <>", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutGreaterThan(String value) {
+            addCriterion("big_out >", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutGreaterThanOrEqualTo(String value) {
+            addCriterion("big_out >=", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutLessThan(String value) {
+            addCriterion("big_out <", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutLessThanOrEqualTo(String value) {
+            addCriterion("big_out <=", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutLike(String value) {
+            addCriterion("big_out like", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutNotLike(String value) {
+            addCriterion("big_out not like", value, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutIn(List<String> values) {
+            addCriterion("big_out in", values, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutNotIn(List<String> values) {
+            addCriterion("big_out not in", values, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutBetween(String value1, String value2) {
+            addCriterion("big_out between", value1, value2, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigOutNotBetween(String value1, String value2) {
+            addCriterion("big_out not between", value1, value2, "bigOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInIsNull() {
+            addCriterion("medium_in is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInIsNotNull() {
+            addCriterion("medium_in is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInEqualTo(String value) {
+            addCriterion("medium_in =", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInNotEqualTo(String value) {
+            addCriterion("medium_in <>", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInGreaterThan(String value) {
+            addCriterion("medium_in >", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInGreaterThanOrEqualTo(String value) {
+            addCriterion("medium_in >=", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInLessThan(String value) {
+            addCriterion("medium_in <", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInLessThanOrEqualTo(String value) {
+            addCriterion("medium_in <=", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInLike(String value) {
+            addCriterion("medium_in like", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInNotLike(String value) {
+            addCriterion("medium_in not like", value, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInIn(List<String> values) {
+            addCriterion("medium_in in", values, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInNotIn(List<String> values) {
+            addCriterion("medium_in not in", values, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInBetween(String value1, String value2) {
+            addCriterion("medium_in between", value1, value2, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumInNotBetween(String value1, String value2) {
+            addCriterion("medium_in not between", value1, value2, "mediumIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutIsNull() {
+            addCriterion("medium_out is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutIsNotNull() {
+            addCriterion("medium_out is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutEqualTo(String value) {
+            addCriterion("medium_out =", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutNotEqualTo(String value) {
+            addCriterion("medium_out <>", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutGreaterThan(String value) {
+            addCriterion("medium_out >", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutGreaterThanOrEqualTo(String value) {
+            addCriterion("medium_out >=", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutLessThan(String value) {
+            addCriterion("medium_out <", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutLessThanOrEqualTo(String value) {
+            addCriterion("medium_out <=", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutLike(String value) {
+            addCriterion("medium_out like", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutNotLike(String value) {
+            addCriterion("medium_out not like", value, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutIn(List<String> values) {
+            addCriterion("medium_out in", values, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutNotIn(List<String> values) {
+            addCriterion("medium_out not in", values, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutBetween(String value1, String value2) {
+            addCriterion("medium_out between", value1, value2, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andMediumOutNotBetween(String value1, String value2) {
+            addCriterion("medium_out not between", value1, value2, "mediumOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInIsNull() {
+            addCriterion("small_in is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInIsNotNull() {
+            addCriterion("small_in is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInEqualTo(String value) {
+            addCriterion("small_in =", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInNotEqualTo(String value) {
+            addCriterion("small_in <>", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInGreaterThan(String value) {
+            addCriterion("small_in >", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInGreaterThanOrEqualTo(String value) {
+            addCriterion("small_in >=", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInLessThan(String value) {
+            addCriterion("small_in <", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInLessThanOrEqualTo(String value) {
+            addCriterion("small_in <=", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInLike(String value) {
+            addCriterion("small_in like", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInNotLike(String value) {
+            addCriterion("small_in not like", value, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInIn(List<String> values) {
+            addCriterion("small_in in", values, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInNotIn(List<String> values) {
+            addCriterion("small_in not in", values, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInBetween(String value1, String value2) {
+            addCriterion("small_in between", value1, value2, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallInNotBetween(String value1, String value2) {
+            addCriterion("small_in not between", value1, value2, "smallIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutIsNull() {
+            addCriterion("small_out is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutIsNotNull() {
+            addCriterion("small_out is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutEqualTo(String value) {
+            addCriterion("small_out =", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutNotEqualTo(String value) {
+            addCriterion("small_out <>", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutGreaterThan(String value) {
+            addCriterion("small_out >", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutGreaterThanOrEqualTo(String value) {
+            addCriterion("small_out >=", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutLessThan(String value) {
+            addCriterion("small_out <", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutLessThanOrEqualTo(String value) {
+            addCriterion("small_out <=", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutLike(String value) {
+            addCriterion("small_out like", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutNotLike(String value) {
+            addCriterion("small_out not like", value, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutIn(List<String> values) {
+            addCriterion("small_out in", values, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutNotIn(List<String> values) {
+            addCriterion("small_out not in", values, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutBetween(String value1, String value2) {
+            addCriterion("small_out between", value1, value2, "smallOut");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallOutNotBetween(String value1, String value2) {
+            addCriterion("small_out not between", value1, value2, "smallOut");
             return (Criteria) this;
         }
 

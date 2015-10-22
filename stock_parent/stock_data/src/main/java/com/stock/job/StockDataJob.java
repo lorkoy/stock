@@ -2,6 +2,8 @@ package com.stock.job;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.catalina.tribes.util.Arrays;
 import org.slf4j.Logger;
@@ -12,8 +14,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.stock.data.biz.BankrollService;
 import com.stock.data.biz.DataService;
 import com.stock.db.entity.Bankroll;
+import com.stock.util.DateUtils;
 import com.stock.util.HttpUtils;
 import com.stock.util.PropertiesUtil;
 
@@ -26,13 +30,15 @@ public class StockDataJob{
 	@Autowired
 	private DataService dataService;
 	
+	@Autowired
+	private BankrollService bankrollService;
 
 	/**
 	 * @author ray 每分钟获取一次股票实时数据 
 	 * 2015年6月11日 下午1:46:41
 	 */
 //	 @Scheduled(cron="0 0/1,0,38 13-21 ? * MON-FRI")
-	@Scheduled(cron="0 0/1,* * ? * MON-FRI")
+//	@Scheduled(cron="0 0/1,* * ? * MON-FRI")
 	public void stockDataJob() {
 		if(jobSwith()){
 			logger.info("get stock data job start at {}", new Date());
@@ -80,21 +86,40 @@ public class StockDataJob{
 	 */
 	@Scheduled(cron="0 * 20 0/1 * MON-FRI")
 	public void saveCapital(){
-		String url = PropertiesUtil.getInstance().get("capital_info_url");
-		StringBuffer sb = new StringBuffer(url);
-		sb.replace(sb.indexOf("{stockCode}"), sb.indexOf("{stockCode}")+"{stockCode}".length(), "601989");
-		sb.replace(sb.indexOf("{rt}"), sb.length(), "1");
+		bankrollService.bankrollData();
+	}
+
+	public static void main(String[] args) {
+		String result = "";
 		try {
-			String result = HttpUtils.sendHttpRequest(sb.toString(),"gbk");
-			String[] info = result.split("\n");
-			System.out.println(info[info.length-2]);
-			System.out.println(Arrays.toString(info));
-			Bankroll br = new Bankroll();
-			
+			String url = "http://quote.eastmoney.com/sh600150.html?StockCode=600150";
+			result = HttpUtils.sendHttpRequest(url, "gbk");
+//			System.out.println(result.contains("45038"));
+//			System.out.println(result);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String regex = "<script\\s.*?src=\"([^\"]+)\"[^>]*>(.*?)</script>";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(result);
+		String _url = "";
+		try {
+			while (matcher.find()) {
+				 _url = matcher.group(1);
+				if(_url.contains("http")){
+					String _result = HttpUtils.sendHttpRequest(_url, "gbk");
+					if(_result.contains("hz_b") && _result.contains("hz_a")){
+						System.out.println(_result);
+						System.out.println(_url);
+					}
+					
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("error url is ======================= "+_url);
 			e.printStackTrace();
 		}
 	}
-
-
 }

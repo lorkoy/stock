@@ -37,14 +37,17 @@ public class HttpUtils {
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			return "";
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "";
 		}finally{
 			if(is != null){
 				try {
 					is.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+					return "";
 				}
 			}
 		}

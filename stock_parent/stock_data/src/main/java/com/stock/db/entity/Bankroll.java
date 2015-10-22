@@ -13,15 +13,25 @@ public class Bankroll {
 
     private String date;
 
-    private String mainforce;
+    private String mainforceIn;
 
-    private String large;
+    private String mainforceOut;
 
-    private String big;
+    private String largeIn;
 
-    private String medium;
+    private String largeOut;
 
-    private String small;
+    private String bigIn;
+
+    private String bigOut;
+
+    private String mediumIn;
+
+    private String mediumOut;
+
+    private String smallIn;
+
+    private String smallOut;
 
     private Date createDate;
 
@@ -65,44 +75,84 @@ public class Bankroll {
         this.date = date == null ? null : date.trim();
     }
 
-    public String getMainforce() {
-        return mainforce;
+    public String getMainforceIn() {
+        return mainforceIn;
     }
 
-    public void setMainforce(String mainforce) {
-        this.mainforce = mainforce == null ? null : mainforce.trim();
+    public void setMainforceIn(String mainforceIn) {
+        this.mainforceIn = mainforceIn == null ? null : mainforceIn.trim();
     }
 
-    public String getLarge() {
-        return large;
+    public String getMainforceOut() {
+        return mainforceOut;
     }
 
-    public void setLarge(String large) {
-        this.large = large == null ? null : large.trim();
+    public void setMainforceOut(String mainforceOut) {
+        this.mainforceOut = mainforceOut == null ? null : mainforceOut.trim();
     }
 
-    public String getBig() {
-        return big;
+    public String getLargeIn() {
+        return largeIn;
     }
 
-    public void setBig(String big) {
-        this.big = big == null ? null : big.trim();
+    public void setLargeIn(String largeIn) {
+        this.largeIn = largeIn == null ? null : largeIn.trim();
     }
 
-    public String getMedium() {
-        return medium;
+    public String getLargeOut() {
+        return largeOut;
     }
 
-    public void setMedium(String medium) {
-        this.medium = medium == null ? null : medium.trim();
+    public void setLargeOut(String largeOut) {
+        this.largeOut = largeOut == null ? null : largeOut.trim();
     }
 
-    public String getSmall() {
-        return small;
+    public String getBigIn() {
+        return bigIn;
     }
 
-    public void setSmall(String small) {
-        this.small = small == null ? null : small.trim();
+    public void setBigIn(String bigIn) {
+        this.bigIn = bigIn == null ? null : bigIn.trim();
+    }
+
+    public String getBigOut() {
+        return bigOut;
+    }
+
+    public void setBigOut(String bigOut) {
+        this.bigOut = bigOut == null ? null : bigOut.trim();
+    }
+
+    public String getMediumIn() {
+        return mediumIn;
+    }
+
+    public void setMediumIn(String mediumIn) {
+        this.mediumIn = mediumIn == null ? null : mediumIn.trim();
+    }
+
+    public String getMediumOut() {
+        return mediumOut;
+    }
+
+    public void setMediumOut(String mediumOut) {
+        this.mediumOut = mediumOut == null ? null : mediumOut.trim();
+    }
+
+    public String getSmallIn() {
+        return smallIn;
+    }
+
+    public void setSmallIn(String smallIn) {
+        this.smallIn = smallIn == null ? null : smallIn.trim();
+    }
+
+    public String getSmallOut() {
+        return smallOut;
+    }
+
+    public void setSmallOut(String smallOut) {
+        this.smallOut = smallOut == null ? null : smallOut.trim();
     }
 
     public Date getCreateDate() {
