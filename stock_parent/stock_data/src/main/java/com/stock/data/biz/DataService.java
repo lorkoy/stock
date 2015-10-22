@@ -2,6 +2,8 @@ package com.stock.data.biz;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ import com.stock.exception.ExUtils;
 @Transactional(isolation=Isolation.READ_COMMITTED,rollbackFor={Exception.class})
 public class DataService {
 	
-	@Autowired
+	@Resource
 	private StockInfoMapper stockInfoMapper;
 	
 	private static final Logger logger = LoggerFactory.getLogger(DataService.class);

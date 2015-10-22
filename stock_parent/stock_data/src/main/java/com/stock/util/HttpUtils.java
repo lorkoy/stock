@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.apache.catalina.tribes.util.Arrays;
 
 /**
  * @author think
@@ -22,7 +18,7 @@ public class HttpUtils {
 	/**
 	 * 发送http请求
 	 *@author ray
-	 *@param _url 请求地上
+	 *@param _url 请求地址
 	 *@param param 请求参数
 	 *@return
 	 * 
@@ -40,9 +36,9 @@ public class HttpUtils {
 				out.write(b,0,i);
 			}
 		} catch (MalformedURLException e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
-//			e.printStackTrace();
+			e.printStackTrace();
 		}finally{
 			if(is != null){
 				try {
@@ -53,11 +49,6 @@ public class HttpUtils {
 			}
 		}
 		return out.toString(charset);
-	}
-	
-	
-	public static void main(String[] args) {
-		
 	}
 
 }

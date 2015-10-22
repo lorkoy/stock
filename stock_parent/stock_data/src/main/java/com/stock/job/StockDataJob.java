@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.stock.data.biz.DataService;
+import com.stock.db.entity.Bankroll;
 import com.stock.util.HttpUtils;
 import com.stock.util.PropertiesUtil;
 
@@ -88,6 +89,8 @@ public class StockDataJob{
 			String[] info = result.split("\n");
 			System.out.println(info[info.length-2]);
 			System.out.println(Arrays.toString(info));
+			Bankroll br = new Bankroll();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

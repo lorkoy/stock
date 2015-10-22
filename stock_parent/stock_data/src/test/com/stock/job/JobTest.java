@@ -3,34 +3,32 @@
  */
 package com.stock.job;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
 
+import javax.annotation.Resource;
+
+import org.apache.catalina.tribes.util.Arrays;
 import org.junit.Test;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.StringUtils;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.jdbc.log.Log;
 import com.stock.SpringTestCase;
+import com.stock.db.entity.Bankroll;
+import com.stock.db.mybatis.BankrollMapper;
 import com.stock.util.HttpUtils;
+import com.stock.util.PropertiesUtil;
+import com.stock.util.StringUtil;
 
 /**
  * @author think
  *
  */
-//@ContextConfiguration({ "/spring/applicationContext.xml" })
-public class JobTest{
+@ContextConfiguration({ "/spring/applicationContext.xml" })
+@
+public class JobTest extends SpringTestCase{
+	@Resource
+	private BankrollMapper bankrollMapper;
 	
 //	@Test
 //	@Scheduled(cron="* 0/1 * * * *")
@@ -45,32 +43,30 @@ public class JobTest{
 		System.out.println("test");
 	}
 	
-	public static void main(String[] args) throws IOException, InterruptedException {
-		int start =15001;
-		int end = 19000;
-		CountDownLatch latch = new CountDownLatch(end-start);
-		String _url = "http://passenger.01zhuanche.com/car-rest/webservice/order/token=zQw&clientType=0&orderId=";
-		String path = "e:"+File.separator+"2.txt";
-		Map<String, String> content = new Hashtable<String, String>();
-//		long start = System.currentTimeMillis();
-		for(int i = start;i<=end;i++){
-			String url = _url+i;
-			Bot bot = new Bot(url,content,latch);
-			Thread t = new Thread(bot);
-			t.start();
+	@Test
+	public  void insertBR() throws IOException, InterruptedException {
+		String url = PropertiesUtil.getInstance().get("capital_info_url");
+		StringBuffer sb = new StringBuffer(url);
+		sb.replace(sb.indexOf("{stockCode}"), sb.indexOf("{stockCode}")+"{stockCode}".length(), "601989");
+		sb.replace(sb.indexOf("{rt}"), sb.length(), "1");
+		try {
+			String result = HttpUtils.sendHttpRequest(sb.toString(),"gbk");
+			String[] info = result.split("\n");
+//			System.out.println(info[info.length-2]);
+//			System.out.println(Arrays.toString(info));
+			String[] brStr = info[info.length-2].split(";");
+			Bankroll br = new Bankroll();
+			br.setMainforce(brStr[1]);
+			br.setLarge(brStr[2]);
+			br.setBig(brStr[3]);
+			br.setMedium(brStr[4]);
+			br.setSmall(brStr[5]);
+			br.setCreateDate(new Date());
+			br.setStockCode("601189");
+			bankrollMapper.insert(br);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-//		long end = System.currentTimeMillis();
-//		System.out.println("信息收集完毕："+(end-start)/1000);
-		latch.await();
-		File file = new File(path);
-		FileWriter fos = new FileWriter(file,true);
-		System.out.println(content.size());
-		for(String key:content.keySet()){
-			fos.write(content.get(key));
-			fos.write("\n");
-		}
-		fos.close();
 	}
 	
 	
