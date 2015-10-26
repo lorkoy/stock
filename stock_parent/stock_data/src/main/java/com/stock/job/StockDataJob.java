@@ -86,7 +86,7 @@ public class StockDataJob{
 	 */
 	@Scheduled(cron="0 * 20 0/1 * MON-FRI")
 	public void saveCapital(){
-		bankrollService.bankrollData();
+		bankrollService.handlerBandroll();
 	}
 
 	public static void main(String[] args) {

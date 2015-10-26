@@ -28,28 +28,11 @@ public class HttpUtils {
 		InputStream is = null;
 		byte[] b = new byte[1024];
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		try {
-			URL url = new URL(_url);
-			is = url.openStream();
-			int i = -1;
-			while((i = is.read(b)) != -1){
-				out.write(b,0,i);
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return "";
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "";
-		}finally{
-			if(is != null){
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					return "";
-				}
-			}
+		URL url = new URL(_url);
+		is = url.openStream();
+		int i = -1;
+		while((i = is.read(b)) != -1){
+			out.write(b,0,i);
 		}
 		return out.toString(charset);
 	}
