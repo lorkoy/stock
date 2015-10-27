@@ -32,20 +32,11 @@
 	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.stock.db.mybatis" />
-			<property name="annotationClass" value="com.stock.db.MyBatisRepository"/>
+			<!-- <property name="annotationClass" value="com.stock.db.MyBatisRepository"/> -->
 	</bean>
-	<!-- 另一个事务管理器, Jdbc单数据源事务 -->
-	<bean id="defaultTransactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
 
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
-
-	<!-- production环境 -->
-	<beans profile="production">
-		<context:property-placeholder location="classpath*:application.properties" />
+	<context:property-placeholder location="classpath*:application.properties" />
 
 		<!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
 		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
@@ -63,7 +54,11 @@
 			<property name="timeBetweenEvictionRunsMillis" value="60000" />
 			<property name="minEvictableIdleTimeMillis" value="600000" />
 		</bean>
-	</beans>
-
+<!-- 另一个事务管理器, Jdbc单数据源事务 -->
+	<bean id="defaultTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
 
 </beans>

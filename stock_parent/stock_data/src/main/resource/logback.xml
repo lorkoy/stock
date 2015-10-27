@@ -58,7 +58,7 @@
 		</encoder>
 	</appender> 
 	<!-- business log 使用独立的appender，不继承Root的appender -->
-	<logger name="business" level="INFO" additivity="false">
+	<logger name="business" level="DEBUG" additivity="false">
 		<appender-ref ref="businessLogFile" />
 	</logger>
 	
@@ -69,11 +69,11 @@
 
 	<!--log4jdbc -->
    
-	<logger name="com.stock" level="debug" /> 
+	<logger name="com.stock" level="DEBUG" /> 
 
 	<!-- root level="INFO"-->
  
-	<root level="debug"> 
+	<root level="DEBUG"> 
 		<appender-ref ref="console" />
 		<appender-ref ref="defaultLogFile" />
 	</root>

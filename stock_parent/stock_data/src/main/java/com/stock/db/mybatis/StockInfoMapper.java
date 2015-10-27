@@ -33,4 +33,7 @@ public interface StockInfoMapper {
     int updateByPrimaryKey(StockInfo record);
     
     int batchInsert(final List<StockInfo> list);
+    int batchInsertHalfHour(final List<StockInfo> list);
+    int batchInsertTwoHour(final List<StockInfo> list);
+    int batchInsertPerHour(final List<StockInfo> list);
 }

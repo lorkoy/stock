@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.db.mybatis.BankrollMapper" >
+  <resultMap id="BaseResultMap" type="com.stock.db.entity.Bankroll" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="mainForce_in" property="mainforceIn" jdbcType="VARCHAR" />
+    <result column="mainForce_out" property="mainforceOut" jdbcType="VARCHAR" />
+    <result column="large_in" property="largeIn" jdbcType="VARCHAR" />
+    <result column="large_out" property="largeOut" jdbcType="VARCHAR" />
+    <result column="big_in" property="bigIn" jdbcType="VARCHAR" />
+    <result column="big_out" property="bigOut" jdbcType="VARCHAR" />
+    <result column="medium_in" property="mediumIn" jdbcType="VARCHAR" />
+    <result column="medium_out" property="mediumOut" jdbcType="VARCHAR" />
+    <result column="small_in" property="smallIn" jdbcType="VARCHAR" />
+    <result column="small_out" property="smallOut" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, stock_code, year, month, date, mainForce_in, mainForce_out, large_in, large_out, 
+    big_in, big_out, medium_in, medium_out, small_in, small_out, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stock.db.entity.BankrollExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bankroll
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bankroll
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bankroll
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.stock.db.entity.BankrollExample" >
+    delete from bankroll
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.stock.db.entity.Bankroll" >
+    insert into bankroll (id, stock_code, year, 
+      month, date, mainForce_in, 
+      mainForce_out, large_in, large_out, 
+      big_in, big_out, medium_in, 
+      medium_out, small_in, small_out, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{stockCode,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{month,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{mainforceIn,jdbcType=VARCHAR}, 
+      #{mainforceOut,jdbcType=VARCHAR}, #{largeIn,jdbcType=VARCHAR}, #{largeOut,jdbcType=VARCHAR}, 
+      #{bigIn,jdbcType=VARCHAR}, #{bigOut,jdbcType=VARCHAR}, #{mediumIn,jdbcType=VARCHAR}, 
+      #{mediumOut,jdbcType=VARCHAR}, #{smallIn,jdbcType=VARCHAR}, #{smallOut,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.stock.db.entity.Bankroll" >
+    insert into bankroll
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stockCode != null" >
+        stock_code,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="mainforceIn != null" >
+        mainForce_in,
+      </if>
+      <if test="mainforceOut != null" >
+        mainForce_out,
+      </if>
+      <if test="largeIn != null" >
+        large_in,
+      </if>
+      <if test="largeOut != null" >
+        large_out,
+      </if>
+      <if test="bigIn != null" >
+        big_in,
+      </if>
+      <if test="bigOut != null" >
+        big_out,
+      </if>
+      <if test="mediumIn != null" >
+        medium_in,
+      </if>
+      <if test="mediumOut != null" >
+        medium_out,
+      </if>
+      <if test="smallIn != null" >
+        small_in,
+      </if>
+      <if test="smallOut != null" >
+        small_out,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="mainforceIn != null" >
+        #{mainforceIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mainforceOut != null" >
+        #{mainforceOut,jdbcType=VARCHAR},
+      </if>
+      <if test="largeIn != null" >
+        #{largeIn,jdbcType=VARCHAR},
+      </if>
+      <if test="largeOut != null" >
+        #{largeOut,jdbcType=VARCHAR},
+      </if>
+      <if test="bigIn != null" >
+        #{bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="bigOut != null" >
+        #{bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumIn != null" >
+        #{mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumOut != null" >
+        #{mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIn != null" >
+        #{smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="smallOut != null" >
+        #{smallOut,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.stock.db.entity.BankrollExample" resultType="java.lang.Integer" >
+    select count(*) from bankroll
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bankroll
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockCode != null" >
+        stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainforceIn != null" >
+        mainForce_in = #{record.mainforceIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainforceOut != null" >
+        mainForce_out = #{record.mainforceOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largeIn != null" >
+        large_in = #{record.largeIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largeOut != null" >
+        large_out = #{record.largeOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigIn != null" >
+        big_in = #{record.bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigOut != null" >
+        big_out = #{record.bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumIn != null" >
+        medium_in = #{record.mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediumOut != null" >
+        medium_out = #{record.mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallIn != null" >
+        small_in = #{record.smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallOut != null" >
+        small_out = #{record.smallOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bankroll
+    set id = #{record.id,jdbcType=INTEGER},
+      stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      mainForce_in = #{record.mainforceIn,jdbcType=VARCHAR},
+      mainForce_out = #{record.mainforceOut,jdbcType=VARCHAR},
+      large_in = #{record.largeIn,jdbcType=VARCHAR},
+      large_out = #{record.largeOut,jdbcType=VARCHAR},
+      big_in = #{record.bigIn,jdbcType=VARCHAR},
+      big_out = #{record.bigOut,jdbcType=VARCHAR},
+      medium_in = #{record.mediumIn,jdbcType=VARCHAR},
+      medium_out = #{record.mediumOut,jdbcType=VARCHAR},
+      small_in = #{record.smallIn,jdbcType=VARCHAR},
+      small_out = #{record.smallOut,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stock.db.entity.Bankroll" >
+    update bankroll
+    <set >
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="mainforceIn != null" >
+        mainForce_in = #{mainforceIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mainforceOut != null" >
+        mainForce_out = #{mainforceOut,jdbcType=VARCHAR},
+      </if>
+      <if test="largeIn != null" >
+        large_in = #{largeIn,jdbcType=VARCHAR},
+      </if>
+      <if test="largeOut != null" >
+        large_out = #{largeOut,jdbcType=VARCHAR},
+      </if>
+      <if test="bigIn != null" >
+        big_in = #{bigIn,jdbcType=VARCHAR},
+      </if>
+      <if test="bigOut != null" >
+        big_out = #{bigOut,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumIn != null" >
+        medium_in = #{mediumIn,jdbcType=VARCHAR},
+      </if>
+      <if test="mediumOut != null" >
+        medium_out = #{mediumOut,jdbcType=VARCHAR},
+      </if>
+      <if test="smallIn != null" >
+        small_in = #{smallIn,jdbcType=VARCHAR},
+      </if>
+      <if test="smallOut != null" >
+        small_out = #{smallOut,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stock.db.entity.Bankroll" >
+    update bankroll
+    set stock_code = #{stockCode,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      month = #{month,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      mainForce_in = #{mainforceIn,jdbcType=VARCHAR},
+      mainForce_out = #{mainforceOut,jdbcType=VARCHAR},
+      large_in = #{largeIn,jdbcType=VARCHAR},
+      large_out = #{largeOut,jdbcType=VARCHAR},
+      big_in = #{bigIn,jdbcType=VARCHAR},
+      big_out = #{bigOut,jdbcType=VARCHAR},
+      medium_in = #{mediumIn,jdbcType=VARCHAR},
+      medium_out = #{mediumOut,jdbcType=VARCHAR},
+      small_in = #{smallIn,jdbcType=VARCHAR},
+      small_out = #{smallOut,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+    <insert id="batchInsert" parameterType="java.util.List">
+    insert into bankroll (id, stock_code, year, 
+      month, date, mainForce_in, 
+      mainForce_out, large_in, large_out, 
+      big_in, big_out, medium_in, 
+      medium_out, small_in, small_out, 
+      create_date)
+      values 
+    <foreach collection="list" item="br" separator="," index="index">
+     (#{br.id,jdbcType=INTEGER}, #{br.stockCode,jdbcType=VARCHAR}, #{br.year,jdbcType=VARCHAR}, 
+      #{br.month,jdbcType=VARCHAR}, #{br.date,jdbcType=VARCHAR}, #{br.mainforceIn,jdbcType=VARCHAR}, 
+      #{br.mainforceOut,jdbcType=VARCHAR}, #{br.largeIn,jdbcType=VARCHAR}, #{br.largeOut,jdbcType=VARCHAR}, 
+      #{br.bigIn,jdbcType=VARCHAR}, #{br.bigOut,jdbcType=VARCHAR}, #{br.mediumIn,jdbcType=VARCHAR}, 
+      #{br.mediumOut,jdbcType=VARCHAR}, #{br.smallIn,jdbcType=VARCHAR}, #{br.smallOut,jdbcType=VARCHAR}, 
+      #{br.createDate,jdbcType=TIMESTAMP})
+  </foreach>
+  </insert>
+</mapper>
