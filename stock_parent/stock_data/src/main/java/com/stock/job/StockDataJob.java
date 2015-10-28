@@ -1,11 +1,9 @@
 package com.stock.job;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.catalina.tribes.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import com.stock.data.biz.BankrollService;
 import com.stock.data.biz.DataService;
-import com.stock.db.entity.Bankroll;
-import com.stock.util.DateUtils;
 import com.stock.util.HttpUtils;
-import com.stock.util.PropertiesUtil;
 
 @Configuration
 @EnableScheduling

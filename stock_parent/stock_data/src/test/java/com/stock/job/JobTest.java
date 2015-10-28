@@ -4,24 +4,14 @@
 package com.stock.job;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.catalina.tribes.util.Arrays;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.stock.SpringTestCase;
-import com.stock.cache.CacheManager;
 import com.stock.data.biz.BankrollService;
-import com.stock.db.entity.Bankroll;
-import com.stock.db.entity.Stock;
-import com.stock.util.DateUtils;
-import com.stock.util.HttpUtils;
-import com.stock.util.PropertiesUtil;
 
 /**
  * @author think

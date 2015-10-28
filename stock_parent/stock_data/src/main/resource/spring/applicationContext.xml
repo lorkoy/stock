@@ -73,11 +73,10 @@
 	<tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" />
 	
 	
-  <mongo:mongo host="${db.host}" port="${db.port}"/>
-  
+ <!--  <mongo:mongo host="${db.host}" port="${db.port}"/> -->
+  <mongo:mongo-client host="${db.host}" port="${db.port}"></mongo:mongo-client>
   <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     <constructor-arg ref="mongo"/>
     <constructor-arg name="databaseName" value="${db.database}"/>
   </bean>
-	
 </beans>
